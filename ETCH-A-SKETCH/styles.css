@@ -1,0 +1,27 @@
+:root {
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+body {
+    font-size: 1.6rem;
+}
+
+.main {
+    width: auto;
+    height: 70vh;
+    margin: 50px auto;
+}
+
+.container {
+    display: grid;
+    width: 50%;
+    height: 60vh;
+    margin: 0 auto;
+}
+
+.btn-container {
+    margin: 20px;
+}
