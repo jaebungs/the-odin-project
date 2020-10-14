@@ -17,8 +17,8 @@ body {
 
 .container {
     display: grid;
-    width: 50%;
-    height: 60vh;
+    width: 40%;
+    height: 65vh;
     margin: 0 auto;
 }
 
