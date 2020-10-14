@@ -1,5 +1,6 @@
 const containerEl = document.querySelector('.container')
 const btnContainerEl = document.querySelector('.btn-container')
+
 let dimension = 16
 
 //Need to create grid ex) 16 * 16, total 196 divs.
@@ -20,9 +21,9 @@ const makeGrid = () => {
     makeButtons()
     resetGrids()
     getNewDimension()
+    generateRandomColor()
+    fillGrids()
 }
-
-
 
 //Make buttons for reset, color and new dimension
 const makeButtons = () => {
@@ -49,16 +50,13 @@ const makeButtons = () => {
     // Button for color change
     let colorButton = document.createElement('button')
     colorButton.classList.add('color-btn')
-    colorButton.textContent = 'Random Color'
+    colorButton.textContent = 'Change Color'
     colorButton.style.background = '#2396FF'
     colorButton.style.width = '120px'
     colorButton.style.height = '40px'
     btnContainerEl.appendChild(colorButton)
 }
 
-// const clearGrids = () => {
-    
-// }
 
 // Reset all grids.
 const resetGrids = () => {
@@ -70,6 +68,7 @@ const resetGrids = () => {
         for (let i=0; i < allGrids.length; i++) {
             allGrids[i].style.background = '#fff'
         }
+        fillGrids()
     })
 }
 
@@ -80,30 +79,46 @@ const getNewDimension = () => {
     newDimension.addEventListener('click', function(){
         let userInput = prompt('Please put number between 10 - 100: ')
         
-        if (userInput > 10 || userInput < 100) {
+        if (userInput > 10 && userInput <= 100) {
             dimension = userInput
-            
+
             //Need to reset the page to render? new grids
             containerEl.innerHTML = ``
             btnContainerEl.innerHTML = ``
             return makeGrid()
         } else {
-            return prompt('Error! Inser between 10 - 100')
+            alert('Error! Insert between 10 - 100')
+            location.reload()
         }
         
     })
 }
 
-
+// change grid color to random when random btn is clicked
+const generateRandomColor = () => {
+    let randomBtn = document.querySelector('.color-btn')
+    
+    randomBtn.addEventListener('click', function(){
+        // variable to generate random hex
+        let randomColor = Math.floor(Math.random()*16777215).toString(16);
+        document.addEventListener('mouseover', function(e){
+            let girdId = e.target.getAttribute('id')
+            if (e.target.getAttribute('id')) {
+                    document.getElementById(girdId).style.backgroundColor = '#' + randomColor
+                }
+        })
+    })
+}
 
 // Change grid background when mouseover.
-document.addEventListener('mouseover', function(e){
-    // Get id of a grid
-    let girdId = e.target.getAttribute('id')
-    if (e.target.getAttribute('id')) {
-        document.getElementById(girdId).style.backgroundColor = '#000'
-    }
-})
-
+const fillGrids = () => {
+    document.addEventListener('mouseover', function(e){
+        // Get id of a grid
+        let girdId = e.target.getAttribute('id')
+        if (e.target.getAttribute('id')) {
+            document.getElementById(girdId).style.backgroundColor = '#000'
+        }
+    })
+}
 
 makeGrid()
