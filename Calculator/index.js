@@ -40,7 +40,12 @@ function subtract(a, b){
 }
 
 function divide(a, b){
-    return parseFloat(a) / parseFloat(b) 
+    //Prevent dividing 0
+    if (parseFloat(b) !== 0){
+        return parseFloat(a) / parseFloat(b) 
+    } else {
+        return 'Error'
+    }
 }
 
 function multiply(a, b){
@@ -128,29 +133,30 @@ clearEl.addEventListener('click', function(){
 
 // '=' button pressed
 resultEl.addEventListener('click', function(){
-    if (!prev) {
+    if (!prev && (a &&b)) {
         operate(a, operator, b)
+    } else if(a && !b){
+        //when only numbers inserted and result is clicked
+        displayValue = a
+        display()
     } else {
         operate(prev, secondOperator, next)
     }
     console.log(`result is ${total}`)
     //back to original values
-    displayValue = ''
-    a = ''
-    b = ''
-    prev = 0;
-    operator = null;
-    secondOperator = null;
-    total = 0;
 })
 
 backspaceEl.addEventListener('click', function(){
-    if (displayValue.length <= 1) {
-        displayValue = '0'
-    } else {
+    if (a || b || next) {
+        a = a.substring(0, a.length - 1)
+        b = b.substring(0, b.length - 1)
+        next = next.substring(0, next.length - 1)
         displayValue = displayValue.substring(0, displayValue.length - 1)
     }
-    display() 
+    if (displayValue.length < 1) {
+        displayValue = '0'
+    } 
+    display()
 })
 
 //When percent button is clicked, calculate and rest all.
