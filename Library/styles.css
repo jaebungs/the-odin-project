@@ -1,0 +1,109 @@
+body {
+    box-sizing: border-box;
+    font-family: 'Arimo', sans-serif;
+    font-size: 1.4rem;
+    margin: 0;
+    padding: 0;
+}
+
+.background {
+    background: linear-gradient(rgba(255, 255, 255, .7), rgba(255, 255, 255, .7)), url('https://source.unsplash.com/Ndm1hhIcwHc/1600x900');
+    background-size: 100%;
+    min-height: 100vh;
+    position: relative;
+    top: 0;
+    left: 0; 
+    padding: 30px;
+}
+
+.big-title {
+    padding: 50px;
+    margin: 0;
+}
+
+.input-container {
+    background-color: #ffe7e0;
+    border: 2px solid #000;
+    padding: 20px;
+    width: 400px;
+}
+
+.input-label {
+    display: block;
+    margin: 5px 0;
+}
+
+.input {
+    border: 1px solid #000;
+    font-size: 15px;
+    width: 250px;
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+.submit-input {
+    display: block;
+    background-color: #fff;
+    border: 2px solid #000;
+    font-size: 20px;
+    padding: 5px 15px;
+    margin-top: 20px;
+}
+
+/* remove number spin for pages input */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+#pages {
+    border: 1px solid #000;
+    margin: 0;
+}
+/* My book list section */
+.small-title{
+    padding: 20px 50px;
+    margin-top: 30px;
+    margin-bottom: 0;
+}
+
+.books-container{
+    display: flex;
+}
+
+.reading-container {
+    width: 100%;
+    height: auto;
+}
+
+/* Book styling */
+.card {
+    background:#fccfcf;
+    border-radius: 20px 8px 8px 20px;
+    display: inline-block;
+    padding: 15px;
+    margin: 10px 15px;
+    width: 150px;
+    height: 150px;
+    font-size: 1.1rem;
+}
+.card:after {
+    width: 120px;
+    height: 30px;
+    background: #fff;
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    z-index: 1;
+}
+
+/* title in a card */
+.title {
+    border-bottom: 3px solid #ffa1a1;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 1.3rem;
+    width: 90%;
+    padding: 5px 0;
+    margin: 0;
+}
