@@ -7,7 +7,7 @@ body {
 }
 
 .background {
-    background: linear-gradient(rgba(255, 255, 255, .7), rgba(255, 255, 255, .7)), url('https://source.unsplash.com/Ndm1hhIcwHc/1600x900');
+    background: linear-gradient(rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)), url('https://source.unsplash.com/Ndm1hhIcwHc/1600x900');
     background-size: 100%;
     min-height: 100vh;
     position: relative;
@@ -79,22 +79,37 @@ input::-webkit-inner-spin-button {
 /* Book styling */
 .card {
     background:#fccfcf;
+    border: 1px solid #fc0303;
     border-radius: 20px 8px 8px 20px;
+    box-shadow: inset 3px 0 0 0 #bababa;
     display: inline-block;
     padding: 15px;
     margin: 10px 15px;
-    width: 150px;
-    height: 150px;
-    font-size: 1.1rem;
+    width: 160px;
+    font-size: 1.0rem;
 }
-.card:after {
-    width: 120px;
-    height: 30px;
+
+.card-bottom {
     background: #fff;
-    position: absolute;
-    bottom: 20px;
-    right: 10px;
+    background-image: linear-gradient(to bottom, transparent 6px, #E4E0CE 8px, transparent 10px,  #E4E0CE 12px,  transparent 14px,  #E4E0CE 16px,  transparent 18px,  #E4E0CE 20px,  transparent 22px, #E4E0CE 24px,  transparent 26px);
+    border-radius: 20px 0px 4px 20px;
+    box-shadow: inset 2px 4px 0px 0px #bababa;
+    min-width: calc(100% + 23px);
+    height: 25px;
+    position: relative;
+    right: 8px;
+    top: 8px;
     z-index: 1;
+}
+
+/* erase button in a card */
+.erase-btn {
+    border: none;
+    background-color: #ff3333;
+    cursor: pointer;
+    position: relative;
+    float: right;
+    margin: 0;
 }
 
 /* title in a card */
@@ -104,6 +119,17 @@ input::-webkit-inner-spin-button {
     margin-bottom: 5px;
     font-size: 1.3rem;
     width: 90%;
-    padding: 5px 0;
+    padding: 5px;
     margin: 0;
+}
+
+/* read button in a card */
+.readBtn {
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 1.0rem;
+    font-weight: 600;
+    position: relative;
+    left: 100px;
+    padding: 5px 10px;
 }
