@@ -1,11 +1,3 @@
-//If all inputs are filled with proper value, can make a card.
-// new book object goes into myLibrary array.
-// function that loops over myLibrary array to generate cards.
-//The card goes into books-section
-//When book added, create a card with timestamp that shows added time.
-//When marked read, move the card down, change border color & status & timestamp.
-//red for progress, green for read.
-
 const addEl = document.getElementById('add');
 const readingEl = document.querySelector('.reading-container');
 const cardContainer = document.createDocumentFragment();
@@ -42,13 +34,16 @@ function addBook() {
         myLibrary.push(book);
         // save to localStorage
         window.localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+        titleEl.reset();
+        authorEl.reset();
+        pagesEl.reset();
     } else {
         return alert('Please fill out all forms')
     }
 }
 
 
-// Make a card that have title, author, page, generated time and read check button.
+// Create offScreen DOM tree. A card that have title, author, page, generated time and read check button.
 // I could just put all into readingEl.innerHTMl = `${}`
 function generateCard() {
     readingEl.innerHTML = '';
@@ -57,10 +52,18 @@ function generateCard() {
         const card = document.createElement('div');
         card.classList.add('card');
         card.setAttribute('data-index', i);
+        // if the book is read, add class to change the color
+        if (myLibrary[i].read === true) {
+            card.classList.add('read');
+        }
 
         // Create erase button
         const erase = document.createElement('button');
         erase.classList.add('erase-btn');
+        // if the book is read, add class to change the color
+        if (myLibrary[i].read === true) {
+            erase.classList.add('read-erase-btn');
+        }
         erase.setAttribute('id', `${myLibrary[i].title}`);
         erase.innerText = 'X';
         card.appendChild(erase);
@@ -68,6 +71,9 @@ function generateCard() {
         // Create h5 for title and put into the card
         const title = document.createElement('h5');
         title.classList.add('title');
+        if (myLibrary[i].read === true) {
+            title.classList.add('read-title');
+        }
         title.innerText = `${myLibrary[i].title}`;
         card.appendChild(title);
 
@@ -91,8 +97,14 @@ function generateCard() {
 
         // Create button for read or not
         const readBtn = document.createElement('button');
-        readBtn.innerHTML = 'Read'
         readBtn.classList.add('readBtn');
+        if (myLibrary[i].read === true) {
+            readBtn.innerHTML = 'Unread';
+        } else {
+            readBtn.innerHTML = 'Read';
+        }
+        
+
         readBtn.setAttribute('id', `${myLibrary[i].title}-read`);
         card.appendChild(readBtn)
 
@@ -106,37 +118,58 @@ function generateCard() {
     }
 }
 
-function updatBook(e) {
-    let index = e.target.getAttribute('data-index');
-    console.log(index);
+// Display. 
+function display() {
+    readingEl.appendChild(cardContainer);
+    addEventListeners()
 }
 
-// function eraseBook(e) {
-//     const eraseId = e.target.id;
-//     console.log(e.target)
-// }
+// Add erase and read eventListeners
+function addEventListeners() {
+    let eraseEl = document.querySelectorAll('.erase-btn');
+    let readBtnEl = document.querySelectorAll('.readBtn');
 
+    eraseEl.forEach(function(erase) {
+        erase.addEventListener('click', function(e){
+            eraseBook(e);
+            generateCard();
+            display();
+        })
+    })
+
+    readBtnEl.forEach(function(read) {
+        read.addEventListener('click', function(e){
+            updateBook(e)
+            generateCard();
+            display();
+        })
+    })
+}
+
+function eraseBook(e) {
+    // get data-index from its parents div(which is .card)
+    let index = e.target.parentNode.getAttribute('data-index');
+    myLibrary.splice(index, 1);
+    window.localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+}
+
+function updateBook(e) {
+    let index = e.target.parentNode.getAttribute('data-index');
+
+    // toggle read property
+    myLibrary[index].read = !myLibrary[index].read;
+    window.localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+}
 
 addEl.addEventListener('click', function(e){
     addBook();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
     generateCard();
-    readingEl.appendChild(cardContainer);
+    display()
     e.preventDefault();
 })
 
-// for (let i=0; i < eraseEl.length; i++) {
-//     eraseEl[i].addEventListener('click', function(e){
-//         console.log('click')
-//         // eraseBook(e);
-//         // console.log('Erase')
-//         // readingEl.innerHTML = '';
-//         // generateCard();
-//         // readingEl.appendChild(cardContainer);
-//         // e.preventDefault();
-//     })
-// }
 
 //Initializing - get localstorage and display
 getBookList()
 generateCard()
-readingEl.appendChild(cardContainer);
+display()
