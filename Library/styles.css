@@ -60,6 +60,18 @@ body {
     margin-top: 20px;
 }
 
+
+@media (max-width: 720px) {
+    .input-section {
+        display: block;
+        width: 480px;
+    }
+    
+    .input-container{
+        width: 300px;
+    }
+}
+
 /* remove number spin for pages input */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
