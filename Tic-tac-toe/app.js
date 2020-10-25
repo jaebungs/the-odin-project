@@ -10,13 +10,17 @@
 // 4. able to determine win, lose and tie.
 
 
-let gameBoard = (function() {
-    const gameTypeEl = document.querySelector('.game-type');
+const gameBoard = () => {
     const displayPlayerEl = document.querySelector('.display-player');
     const pvpBtn = document.getElementById('pvp');
     const pvaiBtn = document.getElementById('pvai');
-  
-})();
+
+    const gameOver = false;
+    const turnTrack = false;
+
+    pvpBtn.addEventListener('click', console.log('hi'));
+
+}
 
 function matrix(rows, cols) {
 
@@ -37,7 +41,6 @@ function matrix(rows, cols) {
         return _board[rows, cols] = element;
     }
     
-
     return {rows, cols, getBoard, getCell, setBoard}
 }
 
@@ -47,7 +50,7 @@ const displayBoard = (() => {
     const board = matrix(n, n);
 
     // create game board.
-    function createDOM(){
+    const _createDOM = () => {
         for (let row=0; row < n; row++){
             for (let col=0; col < n; col++){
                 _createCell(row, col);
@@ -56,13 +59,47 @@ const displayBoard = (() => {
     }
 
     // create one cell and put row & col
-    function _createCell(row, col){
+    const _createCell = (row, col) => {
         const divEl = document.createElement('div');
         divEl.classList.add('cell');
         divEl.setAttribute('row', row);
         divEl.setAttribute('col', col);
+        divEl.addEventListener('click', clicked, false)
         gameSectionEl.appendChild(divEl);
     }
 
-    createDOM()
+    const clicked = (e) => {
+        let row = e.target.getAttribute('row');
+        let col = e.target.getAttribute('col');
+        let value = e.target.innerText;
+        console.log(`row:${row}`, `col:${col}`, value)
+    }
+
+    _createDOM()
 })();
+
+// Player factory function
+const player = (player, element) => {
+    let win = 0; 
+
+    const getWin = () => {
+        return win
+    }
+    const increaseWin = () => {
+        win++
+    }
+
+    const delWin = () => {
+        win = 0;
+    }
+
+    return {player, element, getWin, increaseWin, delWin}
+}
+
+const pvp = () => {
+    const gameTypeEl = document.querySelector('.type-section');
+    const player1 = player('player1', 'x');
+    const player2 = player('player2', 'o');
+    console.log('pvp')
+    gameTypeEl.innerHTML = ''
+}

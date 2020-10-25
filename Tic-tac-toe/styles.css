@@ -1,7 +1,6 @@
 body {
     background-color: #595959;
     color: #fff;
-    box-sizing: border-box;
 }
 
 .header-container {
@@ -42,4 +41,7 @@ body {
 
 .cell{
     border: 2px solid #fff;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
 }
