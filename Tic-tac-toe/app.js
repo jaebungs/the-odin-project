@@ -9,21 +9,7 @@
 // 3. able to listen which grid is clicked.
 // 4. able to determine win, lose and tie.
 
-
-const gameBoard = () => {
-    const displayPlayerEl = document.querySelector('.display-player');
-    const pvpBtn = document.getElementById('pvp');
-    const pvaiBtn = document.getElementById('pvai');
-
-    const gameOver = false;
-    const turnTrack = false;
-
-    pvpBtn.addEventListener('click', console.log('hi'));
-
-}
-
 function matrix(rows, cols) {
-
     const createBoard = (rows, cols) => {
         new Array(cols).fill(0).map((i) => {new Array(rows).fill(0)})
     }
@@ -33,24 +19,26 @@ function matrix(rows, cols) {
         return _board;
     }
 
-    function getCell(rows, cols){
-        return _board[rows, cols]
+    function getCell(row, col){
+        return _board[row, col]
     }
 
-    function setBoard(rows, cols, element){
-        return _board[rows, cols] = element;
+    function setBoard(row, col, mark){
+        return _board[row, col] = mark;
     }
     
     return {rows, cols, getBoard, getCell, setBoard}
 }
 
+//Display gameboard - generate DOM
 const displayBoard = (() => {
     const gameSectionEl = document.querySelector('.gameBoard-section');
     const n = 3; //3X3 grid
     const board = matrix(n, n);
-
+    
+    
     // create game board.
-    const _createDOM = () => {
+    const createDOM = () => {
         for (let row=0; row < n; row++){
             for (let col=0; col < n; col++){
                 _createCell(row, col);
@@ -71,15 +59,19 @@ const displayBoard = (() => {
     const clicked = (e) => {
         let row = e.target.getAttribute('row');
         let col = e.target.getAttribute('col');
-        let value = e.target.innerText;
-        console.log(`row:${row}`, `col:${col}`, value)
+        
+        console.log(`row:${row}`, `col:${col}`)
     }
 
-    _createDOM()
+
+    return {createDOM, clicked}
 })();
 
+
+
+
 // Player factory function
-const player = (player, element) => {
+const player = (player, mark) => {
     let win = 0; 
 
     const getWin = () => {
@@ -93,13 +85,58 @@ const player = (player, element) => {
         win = 0;
     }
 
-    return {player, element, getWin, increaseWin, delWin}
+    const nameDisplay = (player, mark) => {
+        const displayPlayerEl = document.querySelector('.display-player');
+
+        const playerEl = document.createElement('div');
+        playerEl.classList.add('player-name');
+        playerEl.innerText = `${player} : ${mark}`;
+        displayPlayerEl.appendChild(playerEl);
+    }
+
+    return {player, mark, getWin, increaseWin, delWin, nameDisplay}
 }
 
-const pvp = () => {
+
+const displayWhoVSWho = (() => {
     const gameTypeEl = document.querySelector('.type-section');
-    const player1 = player('player1', 'x');
-    const player2 = player('player2', 'o');
-    console.log('pvp')
-    gameTypeEl.innerHTML = ''
-}
+
+// When player vs player is picked, make 2 player objects and display players, win, gametype
+    const pvp = () => {
+        const player1 = player('Player 1', 'X');
+        const player2 = player('Player 2', 'O');
+        // Clear pvp or pvai buttons
+        gameTypeEl.innerHTML = ''
+        // display player1 and player 2 instead of game type choices
+        player1.nameDisplay(player1.player, player1.mark)
+        player2.nameDisplay(player2.player, player2.mark)
+        // display game board
+        displayBoard.createDOM()
+    }
+    
+    const pvai = () => {
+        const player1 = player('Player', 'X');
+        const player2 = player('AI', 'O');
+        // Clear pvp or pvai buttons
+        gameTypeEl.innerHTML = ''
+        // display player1 and player 2 instead of game type choices
+        player1.nameDisplay(player1.player, player1.mark)
+        player2.nameDisplay(player2.player, player2.mark)
+        // display game board
+        displayBoard.createDOM()
+    }
+
+    return {pvp, pvai}
+})();
+
+
+const gameBoard = (() => {
+    const pvpBtn = document.getElementById('pvp');
+    const pvaiBtn = document.getElementById('pvai');
+    const gameOver = false;
+    const turnTrack = false;
+
+    pvpBtn.addEventListener('click', displayWhoVSWho.pvp);
+    pvaiBtn.addEventListener('click', displayWhoVSWho.pvai);
+
+})();

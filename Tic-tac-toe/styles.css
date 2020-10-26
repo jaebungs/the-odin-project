@@ -19,6 +19,17 @@ body {
     margin: 150px 20px;
 }
 
+/* display players */
+.display-player {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.player-name {
+    font-size: 2.0rem;
+    margin: 0 100px;
+}
+
 .reset-section{
     text-align: center;
 }
@@ -28,6 +39,7 @@ body {
     padding: 10px;
     margin: 30px;
 }
+
 
 /* Game Board styles */
 .gameBoard-section{
