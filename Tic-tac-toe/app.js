@@ -34,7 +34,6 @@ function matrix(rows, cols) {
 const displayBoard = (() => {
     const gameSectionEl = document.querySelector('.gameBoard-section');
     const n = 3; //3X3 grid
-    const board = matrix(n, n);
     
     
     // create game board.
@@ -59,12 +58,12 @@ const displayBoard = (() => {
     const clicked = (e) => {
         let row = e.target.getAttribute('row');
         let col = e.target.getAttribute('col');
-        
         console.log(`row:${row}`, `col:${col}`)
+        return {row, col}
     }
 
 
-    return {createDOM, clicked}
+    return {n, createDOM, clicked}
 })();
 
 
@@ -99,9 +98,23 @@ const player = (player, mark) => {
 
 
 const displayWhoVSWho = (() => {
-    const gameTypeEl = document.querySelector('.type-section');
 
-// When player vs player is picked, make 2 player objects and display players, win, gametype
+
+    return {pvp, pvai}
+})();
+
+
+const gameBoard = (() => {
+    const gameTypeEl = document.querySelector('.type-section');
+    const pvpBtn = document.getElementById('pvp');
+    const pvaiBtn = document.getElementById('pvai');
+    const gameOver = false;
+    const turnTrack = false;
+
+    const board = matrix(displayBoard.n, displayBoard.n);
+    board.getBoard();
+
+    // When player vs player is picked, make 2 player objects and display players, win, gametype
     const pvp = () => {
         const player1 = player('Player 1', 'X');
         const player2 = player('Player 2', 'O');
@@ -111,7 +124,9 @@ const displayWhoVSWho = (() => {
         player1.nameDisplay(player1.player, player1.mark)
         player2.nameDisplay(player2.player, player2.mark)
         // display game board
-        displayBoard.createDOM()
+        displayBoard.createDOM();
+        // 
+
     }
     
     const pvai = () => {
@@ -120,23 +135,15 @@ const displayWhoVSWho = (() => {
         // Clear pvp or pvai buttons
         gameTypeEl.innerHTML = ''
         // display player1 and player 2 instead of game type choices
-        player1.nameDisplay(player1.player, player1.mark)
-        player2.nameDisplay(player2.player, player2.mark)
+        player1.nameDisplay(player1.player, player1.mark);
+        player2.nameDisplay(player2.player, player2.mark);
         // display game board
         displayBoard.createDOM()
     }
 
-    return {pvp, pvai}
-})();
 
-
-const gameBoard = (() => {
-    const pvpBtn = document.getElementById('pvp');
-    const pvaiBtn = document.getElementById('pvai');
-    const gameOver = false;
-    const turnTrack = false;
-
-    pvpBtn.addEventListener('click', displayWhoVSWho.pvp);
-    pvaiBtn.addEventListener('click', displayWhoVSWho.pvai);
-
+    
+        //PvP or PvAI
+        pvpBtn.addEventListener('click', pvp);
+        pvaiBtn.addEventListener('click', pvai);
 })();
