@@ -79,7 +79,6 @@ const displayBoard = () => {
         let row = e.target.getAttribute('row');
         let col = e.target.getAttribute('col');
         console.log(`row:${row}`, `col:${col}`);
-        return {row, col}
     }
 
     // Display on top, who is playing and their mark. 
@@ -107,10 +106,10 @@ const displayBoard = () => {
 
 const game = (() => {
     const gameTypeEl = document.querySelector('.type-section');
+    const gameSectionEl = document.querySelector('.gameBoard-section')
+    const resetSectionEl = document.querySelector('.reset-section');
     const pvpBtn = document.getElementById('pvp');
     const pvaiBtn = document.getElementById('pvai');
-    let gameOver = false;
-    let turnCheck = false;
 
     const grid = grids()
     const board = displayBoard()
@@ -118,22 +117,45 @@ const game = (() => {
     const player2 = players('Player 2', 'O');
     const AI = players('AI', 'O');
 
+    let gameOver = false;
+    let turnCheck = false;
+    let row;
+    let col;
+
     const pvp = () => {
         gameTypeEl.innerHTML = ''
+        // display board, players, scores
         board.nameDisplay(player1);
         board.nameDisplay(player2);
         board.scoreDisplay(player1);
         board.scoreDisplay(player2);
         board.createBoard()
+        resetSectionEl.style.display = 'block';
+
     }
 
-    const placeMark = (player) => {
-        if (!turnCheck){
-            grid.setCell(player.mark)
+    const placeMark = (row, col) => {
+        let _isCellEmpty = grid.getCell(row, col) === ''
+        if (!gameOver && !turnCheck && _isCellEmpty) {
+            grid.setCell(row, col, player1.mark)
+            turnCheck = !turnCheck
+            board.createBoard()
+            console.log(grid.getBoard()) //for check
+        } else if (!gameOver && turnCheck && _isCellEmpty) {
+            grid.setCell(row, col, player2.mark)
+            turnCheck = !turnCheck
+            board.createBoard()
+            console.log(grid.getBoard()) //for check
         }
     }
 
     pvpBtn.addEventListener('click', pvp);
 
-
+    gameSectionEl.addEventListener('click', (e) => {
+        if (e.target.className === 'cell') {
+            row = e.target.getAttribute('row');
+            col = e.target.getAttribute('col');
+        }
+        placeMark(row, col);
+    })
 })();
