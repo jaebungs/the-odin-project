@@ -1,43 +1,61 @@
-// // Few global variable as possible
-// public - rendering the board, clearing
-// priavate - scores, player, minimax, track the board, title display
+const grids = () => {
+    // const createGrids = (rows, cols) => {
+    //     new Array(cols).fill(' ').map((i) => {new Array(rows).fill(' ')})
+    // }
+    // const _board = createGrids(rows, cols);
+    let _board = [
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', '']
+    ]
 
-// click pvp or pvc
-//---pvp. pvc later
-// 1. render a board, display game type, who's turn.
-// 2. create 2 players
-// 3. able to listen which grid is clicked.
-// 4. able to determine win, lose and tie.
-
-function matrix(rows, cols) {
-    const createBoard = (rows, cols) => {
-        new Array(cols).fill(0).map((i) => {new Array(rows).fill(0)})
-    }
-    const _board = createBoard(rows, cols)
-    
-    function getBoard(){
+    const getBoard = () => {
         return _board;
     }
 
-    function getCell(row, col){
-        return _board[row, col]
+    const setCell = (row, col, mark) => {
+        _board[row][col] = mark;
     }
 
-    function setBoard(row, col, mark){
-        return _board[row, col] = mark;
+    const resetBoard = () => {
+        for (let i=0; i < 3; i++){
+            for (let j=0; j < 3; j++){
+                _board[i][j] = ''
+            }
+        }
     }
     
-    return {rows, cols, getBoard, getCell, setBoard}
+    const getCell = (row, col) => {
+        return _board[row][col]
+    }
+
+    return {getBoard, setCell, resetBoard, getCell}
 }
 
-//Display gameboard - generate DOM
-const displayBoard = (() => {
-    const gameSectionEl = document.querySelector('.gameBoard-section');
-    const n = 3; //3X3 grid
-    
-    
-    // create game board.
-    const createDOM = () => {
+// Create player objects with factory function
+const players = (name, mark) => {
+    let score = 0;
+
+    const increaseScore = () => {
+        score++;
+    }
+
+    const getScore = () => {
+        return score;
+    }
+
+    const resetScore = () => {
+        score = 0;
+    }
+
+    return {name, mark, increaseScore, getScore, resetScore}
+};
+
+const displayBoard = () => {
+    let n = 3;
+    const grid = grids()
+
+    const createBoard = () => {
         for (let row=0; row < n; row++){
             for (let col=0; col < n; col++){
                 _createCell(row, col);
@@ -47,103 +65,102 @@ const displayBoard = (() => {
 
     // create one cell and put row & col
     const _createCell = (row, col) => {
+        const gameSectionEl = document.querySelector('.gameBoard-section');
         const divEl = document.createElement('div');
         divEl.classList.add('cell');
         divEl.setAttribute('row', row);
         divEl.setAttribute('col', col);
-        divEl.addEventListener('click', clicked, false)
+        divEl.addEventListener('click', clicked);
         gameSectionEl.appendChild(divEl);
     }
 
     const clicked = (e) => {
         let row = e.target.getAttribute('row');
         let col = e.target.getAttribute('col');
-        console.log(`row:${row}`, `col:${col}`)
-        return {row, col}
+        console.log(`row:${row}`, `col:${col}`);
     }
 
-
-    return {n, createDOM, clicked}
-})();
-
-
-
-
-// Player factory function
-const player = (player, mark) => {
-    let win = 0; 
-
-    const getWin = () => {
-        return win
-    }
-    const increaseWin = () => {
-        win++
-    }
-
-    const delWin = () => {
-        win = 0;
-    }
-
-    const nameDisplay = (player, mark) => {
+    // Display on top, who is playing and their mark. 
+    const nameDisplay = (player) => {
         const displayPlayerEl = document.querySelector('.display-player');
 
         const playerEl = document.createElement('div');
         playerEl.classList.add('player-name');
-        playerEl.innerText = `${player} : ${mark}`;
+        playerEl.innerText = `${player.name} - ${player.mark}`;
         displayPlayerEl.appendChild(playerEl);
     }
 
-    return {player, mark, getWin, increaseWin, delWin, nameDisplay}
+    //Display Score of each player
+    const scoreDisplay = (player) => {
+        const displayScoreEl = document.querySelector('.display-score');
+
+        const scoreEl = document.createElement('div');
+        scoreEl.classList.add('player-score');
+        scoreEl.innerText = `Score: ${player.getScore()}`;
+        displayScoreEl.appendChild(scoreEl);
+    }
+
+    // Show player's mark
+    const markDisplay = (e, mark) => {
+        e.target.innerText = mark;
+    }
+
+    return {createBoard, clicked, nameDisplay, scoreDisplay, markDisplay}
 }
 
-
-const displayWhoVSWho = (() => {
-
-
-    return {pvp, pvai}
-})();
-
-
-const gameBoard = (() => {
+const game = (() => {
     const gameTypeEl = document.querySelector('.type-section');
+    const gameSectionEl = document.querySelector('.gameBoard-section')
+    const resetSectionEl = document.querySelector('.reset-section');
     const pvpBtn = document.getElementById('pvp');
     const pvaiBtn = document.getElementById('pvai');
-    const gameOver = false;
-    const turnTrack = false;
 
-    const board = matrix(displayBoard.n, displayBoard.n);
-    board.getBoard();
+    const grid = grids()
+    const board = displayBoard()
+    const player1 = players('Player 1', 'X');
+    const player2 = players('Player 2', 'O');
+    const AI = players('AI', 'O');
 
-    // When player vs player is picked, make 2 player objects and display players, win, gametype
+    let gameOver = false;
+    let turnCheck = false;
+    let row;
+    let col;
+
     const pvp = () => {
-        const player1 = player('Player 1', 'X');
-        const player2 = player('Player 2', 'O');
-        // Clear pvp or pvai buttons
         gameTypeEl.innerHTML = ''
-        // display player1 and player 2 instead of game type choices
-        player1.nameDisplay(player1.player, player1.mark)
-        player2.nameDisplay(player2.player, player2.mark)
-        // display game board
-        displayBoard.createDOM();
-        // 
+        // display board, players, scores
+        board.nameDisplay(player1);
+        board.nameDisplay(player2);
+        board.scoreDisplay(player1);
+        board.scoreDisplay(player2);
+        board.createBoard()
+        resetSectionEl.style.display = 'block';
 
     }
-    
-    const pvai = () => {
-        const player1 = player('Player', 'X');
-        const player2 = player('AI', 'O');
-        // Clear pvp or pvai buttons
-        gameTypeEl.innerHTML = ''
-        // display player1 and player 2 instead of game type choices
-        player1.nameDisplay(player1.player, player1.mark);
-        player2.nameDisplay(player2.player, player2.mark);
-        // display game board
-        displayBoard.createDOM()
+
+    const placeMark = (e, row, col) => {
+        let _isCellEmpty = grid.getCell(row, col) === '' //Check if cell is empty
+
+        if (!gameOver && !turnCheck && _isCellEmpty) {
+            grid.setCell(row, col, player1.mark); //save mark to the grid
+            board.markDisplay(e, player1.mark); //Display marker
+            turnCheck = !turnCheck;
+            console.log(grid.getBoard()); //for check
+        } else if (!gameOver && turnCheck && _isCellEmpty) {
+            grid.setCell(row, col, player2.mark);
+            board.markDisplay(e, player2.mark);
+            turnCheck = !turnCheck;
+            console.log(grid.getBoard()); //for check
+        }
     }
 
+    pvpBtn.addEventListener('click', pvp);
 
-    
-        //PvP or PvAI
-        pvpBtn.addEventListener('click', pvp);
-        pvaiBtn.addEventListener('click', pvai);
+    gameSectionEl.addEventListener('click', (e) => {
+        if (e.target.className === 'cell') {
+            row = e.target.getAttribute('row');
+            col = e.target.getAttribute('col');
+        }
+        placeMark(e, row, col);
+    })
 })();
