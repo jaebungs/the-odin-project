@@ -8,6 +8,10 @@ body {
     text-align: center;
 }
 
+.header-container > p {
+    margin: 10px;
+}
+
 .type-section {
     text-align: center;
 }
@@ -20,6 +24,11 @@ body {
 }
 
 /* display players */
+.display-winner {
+    display: none;
+    margin: 0;
+}
+
 .display-player {
     display: flex;
     justify-content: space-evenly;

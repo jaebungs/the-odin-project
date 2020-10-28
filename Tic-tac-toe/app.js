@@ -1,8 +1,4 @@
 const grids = () => {
-    // const createGrids = (rows, cols) => {
-    //     new Array(cols).fill(' ').map((i) => {new Array(rows).fill(' ')})
-    // }
-    // const _board = createGrids(rows, cols);
     let _board = [
         ['', '', ''],
         ['', '', ''],
@@ -17,6 +13,10 @@ const grids = () => {
         _board[row][col] = mark;
     }
 
+    const getCell = (row, col) => {
+        return _board[row][col]
+    }
+
     const resetBoard = () => {
         for (let i=0; i < 3; i++){
             for (let j=0; j < 3; j++){
@@ -24,12 +24,46 @@ const grids = () => {
             }
         }
     }
-    
-    const getCell = (row, col) => {
-        return _board[row][col]
+
+    const _checkIdentical = (a, b, c) => {
+        return (a === b && a === c && a !== '');
+    }
+    // Winning case
+    const checkWin = () => {
+        let winner = null;
+
+        if (_checkIdentical(_board[0][0], _board[0][1], _board[0][2])) {
+            return winner = _board[0][0]
+        }
+        if (_checkIdentical(_board[1][0], _board[1][1], _board[1][2])) {
+            return winner = _board[1][0]
+        }
+        if (_checkIdentical(_board[2][0], _board[2][1], _board[2][2])) {
+            return winner = _board[2][0]
+        }
+
+        if (_checkIdentical(_board[0][0], _board[1][0], _board[2][0])) {
+            return winner = _board[0][0]
+        }
+        if (_checkIdentical(_board[0][1], _board[1][1], _board[2][1])) {
+            return winner = _board[0][1]
+        }
+        if (_checkIdentical(_board[0][2], _board[1][2], _board[2][2])) {
+            return winner = _board[0][2]
+        }
+
+        if (_checkIdentical(_board[0][0], _board[1][1], _board[2][2])) {
+            return winner = _board[0][0]
+        }
+        if (_checkIdentical(_board[0][2], _board[1][1], _board[2][0])) {
+            return winner = _board[0][0]
+        }
+        
+        return winner
     }
 
-    return {getBoard, setCell, resetBoard, getCell}
+    
+    return {getBoard, setCell, resetBoard, getCell, checkWin}
 }
 
 // Create player objects with factory function
@@ -81,23 +115,33 @@ const displayBoard = () => {
     }
 
     // Display on top, who is playing and their mark. 
-    const nameDisplay = (player) => {
+    const nameDisplay = (player1, player2) => {
         const displayPlayerEl = document.querySelector('.display-player');
-
-        const playerEl = document.createElement('div');
-        playerEl.classList.add('player-name');
-        playerEl.innerText = `${player.name} - ${player.mark}`;
-        displayPlayerEl.appendChild(playerEl);
+        //player1 name & mark display
+        const player1El = document.createElement('div');
+        player1El.classList.add('player-name');
+        player1El.innerText = `${player1.name} - ${player1.mark}`;
+        displayPlayerEl.appendChild(player1El);
+        // player2 name & mark display
+        const player2El = document.createElement('div');
+        player2El.classList.add('player-name');
+        player2El.innerText = `${player2.name} - ${player2.mark}`;
+        displayPlayerEl.appendChild(player2El);
     }
 
     //Display Score of each player
-    const scoreDisplay = (player) => {
+    const scoreDisplay = (player1, player2) => {
         const displayScoreEl = document.querySelector('.display-score');
-
-        const scoreEl = document.createElement('div');
-        scoreEl.classList.add('player-score');
-        scoreEl.innerText = `Score: ${player.getScore()}`;
-        displayScoreEl.appendChild(scoreEl);
+        //player1 score display
+        const score1El = document.createElement('div');
+        score1El.classList.add('player-score');
+        score1El.innerText = `Score: ${player1.getScore()}`;
+        displayScoreEl.appendChild(score1El);
+        //player2 score display
+        const score2El = document.createElement('div');
+        score2El.classList.add('player-score');
+        score2El.innerText = `Score: ${player2.getScore()}`;
+        displayScoreEl.appendChild(score2El);
     }
 
     // Show player's mark
@@ -110,49 +154,64 @@ const displayBoard = () => {
 
 const game = (() => {
     const gameTypeEl = document.querySelector('.type-section');
-    const gameSectionEl = document.querySelector('.gameBoard-section')
+    const gameSectionEl = document.querySelector('.gameBoard-section');
+    const displayWinnerEl = document.querySelector('.display-winner');
+    const displayScoreEl = document.querySelector('.display-score');
     const resetSectionEl = document.querySelector('.reset-section');
     const pvpBtn = document.getElementById('pvp');
     const pvaiBtn = document.getElementById('pvai');
-
+    
     const grid = grids()
     const board = displayBoard()
-    const player1 = players('Player 1', 'X');
-    const player2 = players('Player 2', 'O');
     const AI = players('AI', 'O');
 
-    let gameOver = false;
+    let player1 = null;
+    let player2 = null;
     let turnCheck = false;
     let row;
     let col;
+    let _gameOver = null;
+    let winner = null; 
 
+// display board, players, scores for player VS player
     const pvp = () => {
         gameTypeEl.innerHTML = ''
-        // display board, players, scores
-        board.nameDisplay(player1);
-        board.nameDisplay(player2);
-        board.scoreDisplay(player1);
-        board.scoreDisplay(player2);
+        player1 = players('Player 1', 'X');
+        player2 = players('Player 2', 'O');
+        board.nameDisplay(player1, player2);
+        board.scoreDisplay(player1, player2);
         board.createBoard()
         resetSectionEl.style.display = 'block';
-
     }
 
     const placeMark = (e, row, col) => {
         let _isCellEmpty = grid.getCell(row, col) === '' //Check if cell is empty
 
-        if (!gameOver && !turnCheck && _isCellEmpty) {
+        if (winner === null && !turnCheck && _isCellEmpty) {
             grid.setCell(row, col, player1.mark); //save mark to the grid
             board.markDisplay(e, player1.mark); //Display marker
             turnCheck = !turnCheck;
             console.log(grid.getBoard()); //for check
-        } else if (!gameOver && turnCheck && _isCellEmpty) {
+        } else if (winner === null && turnCheck && _isCellEmpty) {
             grid.setCell(row, col, player2.mark);
             board.markDisplay(e, player2.mark);
             turnCheck = !turnCheck;
             console.log(grid.getBoard()); //for check
         }
     }
+
+    const showWinner = (winner) => {
+        if (winner === 'X' && !_gameOver) {
+            player1.increaseScore();
+            displayWinnerEl.innerHTML = player1.name;
+        } else if (winner === 'O' && !_gameOver) {
+            player2.increaseScore();
+            displayWinnerEl.innerHTML = player2.name;
+        }
+        displayScoreEl.innerHTML = '';
+        board.scoreDisplay(player1, player2);
+    }
+
 
     pvpBtn.addEventListener('click', pvp);
 
@@ -162,5 +221,20 @@ const game = (() => {
             col = e.target.getAttribute('col');
         }
         placeMark(e, row, col);
+        winner = grid.checkWin(); // if there is winner, change winner variable
+
+        if (winner !== null) {
+            showWinner(winner)
+            _gameOver = true;
+        }
+    })
+
+    resetSectionEl.addEventListener('click', () => {
+        grid.resetBoard()
+        gameSectionEl.innerHTML = ''
+        board.createBoard()
+        turnCheck = false;
+        winner = null;
+        _gameOver = null;
     })
 })();
