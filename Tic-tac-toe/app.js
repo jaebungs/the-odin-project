@@ -1,5 +1,5 @@
 const grids = () => {
-    let _board = [
+    const _board = [
         ['', '', ''],
         ['', '', ''],
         ['', '', '']
@@ -56,7 +56,7 @@ const grids = () => {
             return winner = _board[0][0]
         }
         if (_checkIdentical(_board[0][2], _board[1][1], _board[2][0])) {
-            return winner = _board[0][0]
+            return winner = _board[0][2]
         }
         
         return winner
@@ -156,8 +156,11 @@ const game = (() => {
     const gameTypeEl = document.querySelector('.type-section');
     const gameSectionEl = document.querySelector('.gameBoard-section');
     const displayWinnerEl = document.querySelector('.display-winner');
+    const displayPlayerEl = document.querySelector('.display-player');
     const displayScoreEl = document.querySelector('.display-score');
     const resetSectionEl = document.querySelector('.reset-section');
+    const resetbtn = document.querySelector('.reset-btn');
+    const newGamebtn = document.querySelector('.new-btn');
     const pvpBtn = document.getElementById('pvp');
     const pvaiBtn = document.getElementById('pvai');
     
@@ -171,11 +174,12 @@ const game = (() => {
     let row;
     let col;
     let _gameOver = null;
-    let winner = null; 
+    let winner = null;
+    let _isFull = false;
 
 // display board, players, scores for player VS player
     const pvp = () => {
-        gameTypeEl.innerHTML = ''
+        gameTypeEl.style.display = 'none';
         player1 = players('Player 1', 'X');
         player2 = players('Player 2', 'O');
         board.nameDisplay(player1, player2);
@@ -186,7 +190,6 @@ const game = (() => {
 
     const placeMark = (e, row, col) => {
         let _isCellEmpty = grid.getCell(row, col) === '' //Check if cell is empty
-
         if (winner === null && !turnCheck && _isCellEmpty) {
             grid.setCell(row, col, player1.mark); //save mark to the grid
             board.markDisplay(e, player1.mark); //Display marker
@@ -200,18 +203,34 @@ const game = (() => {
         }
     }
 
-    const showWinner = (winner) => {
+    // Show winner, increase score and display 
+    const displayWinner = (winner) => {
         if (winner === 'X' && !_gameOver) {
             player1.increaseScore();
-            displayWinnerEl.innerHTML = player1.name;
+            displayWinnerEl.innerHTML = `Winner! ${player1.name}!`;
         } else if (winner === 'O' && !_gameOver) {
             player2.increaseScore();
-            displayWinnerEl.innerHTML = player2.name;
+            displayWinnerEl.innerHTML = `Winner! ${player2.name}!`;
         }
         displayScoreEl.innerHTML = '';
         board.scoreDisplay(player1, player2);
     }
 
+    const displayTie = () => {
+        displayWinnerEl.innerHTML = `It's Tie!`
+    }
+
+    const _checkGridFull = () => {
+        // let gridBoard = grid.getBoard
+        if (
+            grid.getBoard()[0].every((cell) => cell !== '') &&
+            grid.getBoard()[1].every((cell) => cell !== '') &&
+            grid.getBoard()[2].every((cell) => cell !== '')
+        ) {
+            _isFull = true;
+        }
+    }
+    
 
     pvpBtn.addEventListener('click', pvp);
 
@@ -222,19 +241,42 @@ const game = (() => {
         }
         placeMark(e, row, col);
         winner = grid.checkWin(); // if there is winner, change winner variable
-
+        _checkGridFull()
         if (winner !== null) {
-            showWinner(winner)
+            displayWinner(winner)
             _gameOver = true;
+        }
+        if (_isFull){
+            displayTie()
         }
     })
 
-    resetSectionEl.addEventListener('click', () => {
+    resetbtn.addEventListener('click', () => {
         grid.resetBoard()
         gameSectionEl.innerHTML = ''
+        displayWinnerEl.innerHTML = ''
         board.createBoard()
         turnCheck = false;
         winner = null;
+        _isFull = false;
+        _gameOver = null;
+    })
+
+    newGamebtn.addEventListener('click', () => {
+        grid.resetBoard()
+        gameTypeEl.style.display = 'block';
+        gameSectionEl.innerHTML= '';
+        displayWinnerEl.innerHTML = '';
+        displayPlayerEl.innerHTML = '';
+        displayScoreEl.innerHTML = '';
+        resetSectionEl.style.display = 'none';
+        player1.resetScore();
+        player2.resetScore();
+        player1 = null;
+        player2 = null;
+        turnCheck = false;
+        winner = null;
+        _isFull = false;
         _gameOver = null;
     })
 })();
