@@ -104,14 +104,7 @@ const displayBoard = () => {
         divEl.classList.add('cell');
         divEl.setAttribute('row', row);
         divEl.setAttribute('col', col);
-        divEl.addEventListener('click', clicked);
         gameSectionEl.appendChild(divEl);
-    }
-
-    const clicked = (e) => {
-        let row = e.target.getAttribute('row');
-        let col = e.target.getAttribute('col');
-        console.log(`row:${row}`, `col:${col}`);
     }
 
     // Display on top, who is playing and their mark. 
@@ -149,7 +142,25 @@ const displayBoard = () => {
         e.target.innerText = mark;
     }
 
-    return {createBoard, clicked, nameDisplay, scoreDisplay, markDisplay}
+    
+
+    return {createBoard, nameDisplay, scoreDisplay, markDisplay}
+}
+
+
+const minimax = () => {
+    const grids = grids();
+    let board = grids.getBoard();
+    let emptyCells = [];
+
+    for (let i=0; i < 3; i++){
+        for (let j=0; j<3; j++){
+            if (board[i][j] === ''){
+                emptyCell.push(board[i][j]);
+            }
+        }
+    }
+
 }
 
 const game = (() => {
@@ -163,10 +174,9 @@ const game = (() => {
     const newGamebtn = document.querySelector('.new-btn');
     const pvpBtn = document.getElementById('pvp');
     const pvaiBtn = document.getElementById('pvai');
-    
+
     const grid = grids()
     const board = displayBoard()
-    const AI = players('AI', 'O');
 
     let player1 = null;
     let player2 = null;
@@ -178,10 +188,20 @@ const game = (() => {
     let _isFull = false;
 
 // display board, players, scores for player VS player
-    const pvp = () => {
+    const _pvp = () => {
         gameTypeEl.style.display = 'none';
         player1 = players('Player 1', 'X');
         player2 = players('Player 2', 'O');
+        board.nameDisplay(player1, player2);
+        board.scoreDisplay(player1, player2);
+        board.createBoard()
+        resetSectionEl.style.display = 'block';
+    }
+
+    const _pvai = () => {
+        gameTypeEl.style.display = 'none';
+        player1 = players('Player 1', 'X');
+        player2 = players('AI', 'O');
         board.nameDisplay(player1, player2);
         board.scoreDisplay(player1, player2);
         board.createBoard()
@@ -194,10 +214,43 @@ const game = (() => {
             grid.setCell(row, col, player1.mark); //save mark to the grid
             board.markDisplay(e, player1.mark); //Display marker
             turnCheck = !turnCheck;
-            console.log(grid.getBoard()); //for check
+            console.log(grid.getBoard());//for check
         } else if (winner === null && turnCheck && _isCellEmpty) {
             grid.setCell(row, col, player2.mark);
             board.markDisplay(e, player2.mark);
+            turnCheck = !turnCheck;
+            console.log(grid.getBoard()); //for check
+        }
+        winner = grid.checkWin();
+    }
+
+    const randomComputerMove = () => {
+        let emptyCells = [];
+
+        for (let row=0; row < 3; row++){
+            for (let col=0; col<3; col++){
+                if (grid.getCell(row, col) === ''){
+                    emptyCells.push({row, col});
+                }
+            }
+        }
+        return emptyCells
+    }
+
+    const markSpecificPlace = (row, col) => {
+        let element = document.querySelector(`[row="${row}"][col="${col}"]`);
+        element.innerText = grid.getCell(row, col);
+        console.log(grid.getCell(row, col));
+    }
+
+    const AIPlaceMark = () => {
+        if ( winner === null && turnCheck) {
+            let emptyCell = randomComputerMove();
+            let randomNumber = Math.floor(Math.random() * emptyCell.length)
+            
+            console.log(emptyCell[randomNumber].row)
+            grid.setCell(emptyCell[randomNumber].row, emptyCell[randomNumber].col, player2.mark);
+            markSpecificPlace(emptyCell[randomNumber].row, emptyCell[randomNumber].col);
             turnCheck = !turnCheck;
             console.log(grid.getBoard()); //for check
         }
@@ -231,26 +284,35 @@ const game = (() => {
         }
     }
     
+    // Choose PvP or PvAI.
+    pvpBtn.addEventListener('click', _pvp);
+    pvaiBtn.addEventListener('click', _pvai);
 
-    pvpBtn.addEventListener('click', pvp);
-
+    //Used this to control game
     gameSectionEl.addEventListener('click', (e) => {
         if (e.target.className === 'cell') {
             row = e.target.getAttribute('row');
             col = e.target.getAttribute('col');
         }
+        
         placeMark(e, row, col);
-        winner = grid.checkWin(); // if there is winner, change winner variable
         _checkGridFull()
+        winner = grid.checkWin();
         if (winner !== null) {
             displayWinner(winner)
             _gameOver = true;
         }
-        if (_isFull){
+        if (!winner && _isFull){
             displayTie()
         }
+        if (player2.name === 'AI') {
+            AIPlaceMark()
+        }
+         // if there is winner, change winner variable
     })
+    
 
+    // Reset - clear board, but keep score
     resetbtn.addEventListener('click', () => {
         grid.resetBoard()
         gameSectionEl.innerHTML = ''
@@ -262,6 +324,7 @@ const game = (() => {
         _gameOver = null;
     })
 
+    // Reset everything and go back to PvP or PvAI.
     newGamebtn.addEventListener('click', () => {
         grid.resetBoard()
         gameTypeEl.style.display = 'block';
