@@ -11,12 +11,14 @@ let date = new Date().toISOString().slice(0, 10);
 let myLibrary = [];
 
 // book constructor
-function Book(title, author, pages) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.date = date;
-    this.read = false;
+class Book{
+    constructor(title, author, pages) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.date = date;
+        this.read = false;
+    }
 }
 
 function getBookList() {
