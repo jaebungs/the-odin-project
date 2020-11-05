@@ -67,9 +67,20 @@ body::after{
 }
 
 .header {
+    color: #cd0a0a;
     font-size: 5rem;
     letter-spacing: 7px;
     margin: 0 0 50px 0;
+    animation-name: appear;
+    animation-duration: 2s;
+    animation-iteration-count: 1
+}
+
+@keyframes appear {
+    0% {color:#fff;}
+    100%{
+        color: #cd0a0a;
+    }
 }
 
 .big-logo {
@@ -79,7 +90,25 @@ body::after{
 /* ------- About section ------- */
 .intro-p {
     font-size: 2rem;
-    padding: 10px 30px;
+    padding: 10px 50px;
+    position: relative;
+    opacity: 0;
+    animation-name: slideup;
+    animation-duration: 1.5s;
+    animation-delay: 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideup {
+    0%{
+        opacity: 0;
+        transform: translateY(50%);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0%);
+    }
 }
 
 .image-container {
@@ -89,7 +118,7 @@ body::after{
 }
 
 .intro-image {
-    border-radius: 40px;
+    border-radius: 10%;
     width: 100%;
 }
 
