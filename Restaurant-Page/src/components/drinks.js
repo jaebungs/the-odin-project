@@ -1,7 +1,7 @@
 const displayDrinks = () => {
     const html = `
-        <div class="About-image">
-            <img src="" class="big-logo" alt="Restaurant Logo">
+        <div class="logo-image">
+            <img src="./images/logo.png" class="big-logo" alt="Restaurant Logo">
         </div>
 
         <h1 class="header">Drinks</h1>
