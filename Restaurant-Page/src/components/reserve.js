@@ -6,7 +6,7 @@ const displayReserve = () => {
     <div class="reservation-container">
     <h1 class="header">Reservation</h1>
     <p>We can accept all reservations!</p>
-    <p>Because we have plenty of space!</p>
+    <p>Because we have huuggee extra spaces!</p>
     <p>If you have any question, please send a email to <a href="">matomato@matomato.ca</a></p>
     <div class="form-container">
         <form class="reservation-form">
@@ -29,7 +29,7 @@ const displayReserve = () => {
             <input type="text" name="date" placeholder="Enter Date">
             <label class="input-label" for="time">Time:</label>
             <input type="text" name="time" placeholder="Enter Time">
-            <button class="submit-btn">Reserve</button>
+            <button class="submit-reservation-btn" role="reserve">Reserve</button>
         </form>
     </div>
 

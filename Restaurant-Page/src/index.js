@@ -5,15 +5,12 @@ import {displayDrinks} from './components/drinks.js';
 import {displayFooter} from './components/footer.js'
 import {displayReserve} from './components/reserve.js'
 
-
-
-
 const display = (() => {
     const navbarEl = document.querySelector('.header-section');
     const mainEl = document.querySelector('.main-section');
     const footerEl = document.querySelector('.footer-section');
 
     navbarEl.innerHTML = displayNavbar();
-    // mainEl.innerHTML = displayAbout();
+    mainEl.innerHTML = displayAbout();
     footerEl.innerHTML = displayFooter();
 })();

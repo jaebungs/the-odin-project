@@ -1,11 +1,11 @@
 const displayNavbar = () => {
     const html = `
-        <nav class="navbar">
+        <nav class="navbar" role="navigation">
             <ul class="nav-items">
-                <li class="nav-item">About</li>
-                <li class="nav-item">Meals</li>
-                <li class="nav-item">Drinks</li>
-                <li class="nav-item">Reserve</li>
+                <li><a class="nav-item" href="#" role="about-button">About</a></li>
+                <li><a class="nav-item" href="#" role="meals-button">Meals</a></li>
+                <li><a class="nav-item" href="#" role="drinks-button">Drinks</a></li>
+                <li><a class="nav-item" href="#" role="reserve-button">Reserve</a></li>
             </ul>
         </nav>
     `
