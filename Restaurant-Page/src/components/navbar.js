@@ -14,9 +14,16 @@ const displayNavbar = () => {
 
 // Display white bar under the navigation item
 const displayIndicator = () => {
+    const navItems = document.querySelectorAll('.nav-item');
     const hash = window.location.hash.substring(1);
-    const targetEl = document.getElementById(`${hash}`);
-    targetEl.classList.add('indicator');
+
+    navItems.forEach((item) => {
+        if (item.id !== hash) {
+            item.classList.remove('indicator');
+        } else {
+            item.classList.add('indicator');
+        }
+    })
 }
 
 
