@@ -13,5 +13,5 @@ InnerHtml is slow and not recommended, but fast for prototyping.
 
 ## ScreenShots
 -------------
-![alt text](/dist/images/Screenshot.jpg?raw=true)
-![alt text](/dist/images/Screenshot2.jpg?raw=true)
+![alt text](/dist/images/Screenshot.png?raw=true)
+![alt text](/dist/images/Screenshot2.png?raw=true)
