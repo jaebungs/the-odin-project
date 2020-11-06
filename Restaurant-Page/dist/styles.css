@@ -16,8 +16,7 @@ body {
 }
 body::after{
     content: "";
-    background: url('./images/background.jpg');
-    opacity: 0.3;
+    opacity: 0.6;
     top: 0;
     left: 0;
     position: absolute;
@@ -25,12 +24,13 @@ body::after{
     width: 100%;
     height: 100vh;
     background-size: cover;
+    background-color: #c87941;
     background-position: center center;
 }
 
 .middle-background {
     background-color: #fff5ea;
-    width: 85%;
+    width: 60%;
     height: auto;
     margin: 0 auto;
 }
@@ -39,7 +39,7 @@ body::after{
 .header-section {
     position: sticky;
     top: 0;
-    background-color: #d54062;
+    background-color: #a05344;
     font-size: 2.3rem;
     z-index: 10;
 }
@@ -137,17 +137,71 @@ body::after{
 }   
 
 .meal-image{
-    height: 400px;
+    height: 450px;
 }
 .meal-image2{
-    width: 60%;
+    width: 70%;
     margin: 0 auto;
 }
 .drink-image{
-    height: 400px;
+    height: 450px;
 }
 .drink-image2{
+    width: 60%;
+    margin: 0 auto;
+}
+
+/* ----- reserve section -------- */
+
+.reservation-container {
+    padding: 0 100px;
+}
+
+.form-container{
+    border: 2px solid #d54062;
+    width: 100%;
+    padding: 20px 0;
+    margin: 50px auto;
+    font-size: 2rem;
+}
+
+.input-label {
+    display: block;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.input-text {
     width: 40%;
+    height: 30px;
+    padding: 0 5px;
+}
+
+.input-select {
+    width: 30%;
+    text-align-last:center;
+    height: 30px;
+    padding: 0 5px;
+}
+
+.submit-reservation-btn {
+    background-color: #fff;
+    border-color: #d54062;
+    color: #000;
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 40px auto;
+    padding: 10px 50px;
+}
+
+.location-container {
+    margin-top: 100px;
+}
+
+.map{
+    width: 500px;
+    height: 500px;
     margin: 0 auto;
 }
 
@@ -157,9 +211,27 @@ body::after{
     font-size: 1.5rem;
     text-align: center;
     height: auto;
-    line-height: 0.5;
+    line-height: 0.8;
     margin: 20px auto;
     padding: 5px 0;
 }
 
+@media (max-width: 600px) {
 
+    .middle-background {
+        width: 100%;
+    }
+}
+
+@media (max-width: 460px) {
+    .nav-items {
+        display: flex;
+        flex-direction: column;
+    }
+    .nav-item {
+        margin: 30px;
+    }
+    .header {
+        font-size: 3rem;
+    }
+}

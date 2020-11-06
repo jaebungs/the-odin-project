@@ -2,7 +2,7 @@ import {displayNavbar, displayIndicator} from './components/navbar.js';
 import {displayAbout} from './components/about.js';
 import {displayMeals} from './components/meals.js';
 import {displayDrinks} from './components/drinks.js';
-import {displayReserve} from './components/reserve.js'
+import {displayReserve, minDate, displayReserved} from './components/reserve.js'
 import {displayFooter} from './components/footer.js'
 
 const display = (() => {
@@ -13,6 +13,7 @@ const display = (() => {
     navbarEl.innerHTML = displayNavbar();
     mainEl.innerHTML = displayAbout();
     footerEl.innerHTML = displayFooter();
+    
 
     navbarEl.addEventListener('click', (e)=>{
         const id = e.target.getAttribute('id');
@@ -28,6 +29,8 @@ const display = (() => {
 
         } else if (id === 'Reserve') {
             mainEl.innerHTML = displayReserve();
+            displayReserved();
+            minDate()
         }
     })
 })();
