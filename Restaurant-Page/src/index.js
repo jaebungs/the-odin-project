@@ -13,11 +13,11 @@ const display = (() => {
     navbarEl.innerHTML = displayNavbar();
     mainEl.innerHTML = displayAbout();
     footerEl.innerHTML = displayFooter();
-    
+    displayIndicator()
 
     navbarEl.addEventListener('click', (e)=>{
         const id = e.target.getAttribute('id');
-        
+
         if (id === 'About') {
             mainEl.innerHTML = displayAbout();
 
@@ -26,11 +26,11 @@ const display = (() => {
 
         } else if (id === 'Drinks') {
             mainEl.innerHTML = displayDrinks();
-
         } else if (id === 'Reserve') {
             mainEl.innerHTML = displayReserve();
             displayReserved();
-            minDate()
+            minDate();
         }
     })
+
 })();

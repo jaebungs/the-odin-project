@@ -45,7 +45,7 @@ body::after{
 }
 
 .indicator {
-    border-bottom: 5px solid #fff;
+    border-bottom: 4px solid #fff;
 }
 
 .navbar {
@@ -62,6 +62,10 @@ body::after{
     text-decoration: none;
     margin: 0 20px;
     color: #fff;
+}
+.nav-item:hover {
+    border-bottom: 4px solid #fff;
+
 }
 
 /* ----------main section -----------*/
