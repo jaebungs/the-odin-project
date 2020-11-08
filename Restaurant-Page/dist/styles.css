@@ -238,4 +238,8 @@ body::after{
     .header {
         font-size: 3rem;
     }
+
+    .reservation-container {
+        padding: 0 10px;
+    }
 }
