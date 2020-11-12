@@ -1,0 +1,92 @@
+
+body{
+    box-sizing: border-box;
+    background-color: #aaf0b9;
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+main{
+    display: flex;
+}
+
+/* Project sections */
+.project-display-container {
+    padding: 40px;
+    height: 100vh;
+    border-right: 3px solid #000;
+    background-color: #8ac2e3;
+}
+
+.project-add-container {
+    margin: 50px 0 30px 0;
+}
+
+.project-container{
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.project-title{
+    margin-right: 20px;
+}
+
+.project-add-input {
+    width: 70%;
+    height: 20px;
+}
+
+.project-add-btn {
+    cursor: pointer;
+    background-color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin: 10px 0;
+    font-size: 1.3rem;
+}
+
+/* Todo Add button */
+
+.add-todo-btn {
+    position: relative;
+    left: 500px;
+    bottom: 40px;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 50%;
+    cursor: pointer;
+    text-align: center;
+    font-size: 45px;
+}
+
+/* todo section */
+
+.todo-display-container{
+    padding: 40px 80px;
+    width: 100%;
+}
+
+.todo-container{
+    display: flex;
+    align-items: center;
+}
+
+.todo-container > div {
+    margin: 0 20px;
+}
+.todo-container > button {
+    justify-content: flex-end;
+    margin: 0 5px;
+}
+
+.btn {
+    font-size: 1.3rem;
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+}
