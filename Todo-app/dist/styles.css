@@ -65,7 +65,7 @@ main{
 /* todo section */
 
 .todo-display-container{
-    padding: 40px 80px;
+    padding: 50px 80px;
     width: 100%;
 }
 
@@ -83,10 +83,53 @@ main{
 }
 
 .btn {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     padding: 5px 10px;
     margin: 0 5px;
     background-color: #fff;
     border: none;
     cursor: pointer;
 }
+
+/* popup display section */
+.popup-display-container {
+    width: 40%;
+    height: 100%;
+    padding: 40px 40px;
+    margin: 80px 20px;
+}
+
+.close-btn {
+    display: flex;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border: 5px solid red;
+    cursor: pointer;
+    position: relative;
+    left: 220px;
+    bottom: 65px;
+}
+
+.input-container {
+    margin: 10px 0;
+    font-size: 1.4rem;
+}
+
+.input {
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 10px 0 10px 5px;
+}
+
+.add-btn{
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 30px;
+    padding: 10px 15px;
+    font-size: 1.3rem;
+}
+
