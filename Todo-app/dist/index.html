@@ -8,7 +8,68 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <main>
 
+        <!-- Add todo display -->
+        <div class="add-container">
+            <h2>New Todo</h2>
+            <form class="input-form">
+                <div class="input-container">
+                    <label for="title" class="input-label">Todo:</label>
+                    <input type="text" name="title" class="input">
+                </div>
+                <div class="input-container">
+                    <label for="description" class="input-label">Description:</label>
+                    <input type="text" name="description" class="input">
+                </div>
+                <div class="input-container">
+                    <label for="date" class="input-label">Due:</label>
+                    <input type="date" name="date" class="input">
+                </div>
+                <div class="input-container">
+                    <label for="priority" class="input-label">Priority:</label>
+                    <select name="priority">
+                        <option class="input" value="high">High</option>
+                        <option class="input" value="medium">Medium</option>
+                        <option class="input" value="low">Low</option>
+                    </select>
+                </div>
+
+                <button class="add-btn" role="add-todo">Add New</button>
+            </form>
+        </div>
+
+        <!-- Projects display here -->
+        <div class="project-display-container">
+            <h1>Porject List</h1>
+            <div class="project-add-container">
+                <label for="project-add">Project Name:</label>
+                <input type="text" class="project-add-input" name="project-add">
+            </div>
+
+            <div class="project-container">
+                <h3 class="project-title">Default</h3>
+                <button class="project-modify-btn">Modify</button>
+                <button class="project-delet-btn">Delet</button>
+            </div>
+        </div>
+
+        <!-- Todo display here -->
+        <div class="todo-display-container">
+            <h2>Todo List</h2>
+            <!-- sample todo -->
+                <div class="todo-container" data-index="1">
+                    <div class="priority-display">High</div>
+                    <div class="title-display">Title</div>
+                    <div class="description-display">Description bla bla bla</div>
+                    <div class="due-display">2021-02-01</div>
+
+                    <button class="finish-btn">Check</button>
+                    <button class="modify-btn">Modify</button>
+                    <button class="delet-btn">Delet</button>
+                </div>
+        </div>
+    </main>
     <script src="app.js"></script>
 </body>
 </html>
