@@ -31,6 +31,9 @@ const createAddTodoDisplay = () => {
             </form>
         </div>
     `
+
+    popupDisplayEl.classList.add('slide-show');
+
 }
 
 const limitDueDate = () => {

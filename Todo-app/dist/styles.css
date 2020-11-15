@@ -95,8 +95,13 @@ main{
 .popup-display-container {
     width: 40%;
     height: 100%;
-    padding: 40px 40px;
     margin: 80px 20px;
+}
+
+/* Toggle */
+.slide-show {
+    transition: 1s ease-out;
+    overflow:hidden;
 }
 
 .close-btn {
@@ -132,4 +137,3 @@ main{
     padding: 10px 15px;
     font-size: 1.3rem;
 }
-
