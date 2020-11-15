@@ -1,4 +1,4 @@
-export class Storage {
+class Storage {
     //Get project
     getProjects(){
         let projects
@@ -31,3 +31,4 @@ export class Storage {
     }
 
 } 
+export { Storage }

@@ -1,4 +1,3 @@
-
 class Project {
     constructor(title, todos = []){
         this.title = title,
@@ -15,7 +14,8 @@ class Project {
         });
         if (index > -1) {
             this.todos.splice(index, 1);
-        }
+        };
+
     }
 
     getTodos() {

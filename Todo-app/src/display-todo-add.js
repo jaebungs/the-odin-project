@@ -63,4 +63,4 @@ const renderAddTodo = () => {
     
 }
 
-export { renderAddTodo}
+export { renderAddTodo }
