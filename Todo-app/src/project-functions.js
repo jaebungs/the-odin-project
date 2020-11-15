@@ -1,8 +1,9 @@
 import { Storage } from './storage.js'
-import { Project } from './project-class.js'
+import { Project, ProjectDOMElement } from './project-class.js'
 
 const projectAddFormEl = document.getElementById('project-add-form');
 
+// check if there is duplicated project title.
 const validation = (el) => {
     let projects = Storage.getProjects();
 
@@ -13,22 +14,28 @@ const validation = (el) => {
     return index
 }
 
-//Add project to Localstorage
+//Add new project to Localstorage
 const addProject = () => {
+    const projectDisplay = document.querySelector('.project-display-container');
     const projectAddInput = document.getElementById('project-add').value;
 
-    // check if there is duplicate
-    console.log(validation(projectAddInput))
     if (validation(projectAddInput) === -1) {
+        let numberOfProjects = Storage.getProjects().length;
         // instantiate and save to LocalStorage
         let project = new Project(projectAddInput);
+
+        // create elements for new project
+        let div = new ProjectDOMElement(projectAddInput, numberOfProjects+1);
+
         Storage.saveProject(project);
+        projectDisplay.appendChild(div.div)
         console.log(project)
     } else {
         console.log('Duplicate Project')
     }
 }
 
+// EventListener for Add project form
 const projectDisplayListener = () => {
     projectAddFormEl.addEventListener('submit', (e)=>{
         e.preventDefault();

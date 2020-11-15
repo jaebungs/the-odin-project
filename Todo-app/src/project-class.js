@@ -1,3 +1,6 @@
+import { Storage } from './storage.js'
+
+// Class for creating project object
 class Project {
     constructor(title, todos = []){
         this.title = title,
@@ -23,4 +26,39 @@ class Project {
     }
 }
 
-export { Project }
+// Class for DOM manipulation - display list of projects
+class ProjectDOMElement {
+    constructor(title, index){
+        this.title = title;
+        this.index = index;
+
+        this.div = document.createElement('div');
+        this.h3 = document.createElement('h3');
+        this.deletButton = document.createElement('button');
+
+        this.div.classList.add('project-container');
+        this.h3.classList.add('project-title');
+        this.deletButton.classList.add('btn', 'project-delet-btn');
+
+        this.div.setAttribute('data-index', index);
+
+        this.h3.textContent = title;
+        this.deletButton.textContent = 'Delet';
+
+        this.deletButton.onclick = this.onClickDelet.bind(this);
+
+        this.div.appendChild(this.h3);
+        this.div.appendChild(this.deletButton);
+    }
+
+     //Delete project when clicked
+    onClickDelet() {
+        const projectDisplay = document.querySelector('.project-display-container');
+
+        Storage.removeProject(this.title);
+        projectDisplay.querySelector(`[data-index='${this.index}']`).remove()
+    }
+
+}
+
+export { Project, ProjectDOMElement }
