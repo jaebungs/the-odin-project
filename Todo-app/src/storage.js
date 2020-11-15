@@ -1,6 +1,6 @@
 class Storage {
     //Get project
-    getProjects(){
+    static getProjects(){
         let projects
 
         if (!localStorage.getItem('todoApp')){
@@ -12,14 +12,14 @@ class Storage {
         return projects
     }
 
-    saveProject(project){
+    static saveProject(project){
         let projects = this.getProjects();
 
         projects.push(project);
         localStorage.setItem('todoApp', JSON.stringify(projects));
     }
 
-    removeProject(target){
+    static removeProject(target){
         let projects = this.getProjects();
 
         let index = projects.findIndex((el) => {

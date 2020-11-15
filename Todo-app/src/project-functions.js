@@ -2,10 +2,9 @@ import { Storage } from './storage.js'
 import { Project } from './project-class.js'
 
 const projectAddFormEl = document.getElementById('project-add-form');
-const storage = new Storage()
 
 const validation = (el) => {
-    let projects = storage.getProjects();
+    let projects = Storage.getProjects();
 
     let index = projects.findIndex((project) => {
         return project.title === el
@@ -23,7 +22,7 @@ const addProject = () => {
     if (validation(projectAddInput) === -1) {
         // instantiate and save to LocalStorage
         let project = new Project(projectAddInput);
-        storage.saveProject(project);
+        Storage.saveProject(project);
         console.log(project)
     } else {
         console.log('Duplicate Project')
@@ -35,7 +34,6 @@ const projectDisplayListener = () => {
         e.preventDefault();
         addProject();
     });
-
 }
 
 export { projectDisplayListener }
