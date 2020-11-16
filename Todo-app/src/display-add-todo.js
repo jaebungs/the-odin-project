@@ -1,9 +1,10 @@
 import { Storage } from './storage.js'
+import { Todo } from './todo-class.js'
+import { showTodos } from './show-todos.js'
+
+const popupDisplayEl = document.querySelector('.popup-display-container');
 
 const createAddTodoDisplay = () => {
-    
-    const popupDisplayEl = document.querySelector('.popup-display-container');
-
     popupDisplayEl.style.border = '2px solid #000';
 
     popupDisplayEl.innerHTML = `
@@ -55,18 +56,31 @@ const limitDueDate = () => {
 };
 
 const createNewTodo = () => {
-    const closeEl = document.querySelector('.close-btn');
     const formEl = document.querySelector('.input-form');
     const titleInputEl = document.getElementById('title');
     const dueInputEl = document.getElementById('date');
     const priorityInputeEl = document.getElementById('priority');
+    const projectContainerEls = document.querySelectorAll('.project-container');
+    let index;
 
     formEl.addEventListener('submit', (e) => {
         e.preventDefault();
+
+        // find current project
+        projectContainerEls.forEach((el) => {
+            if (el.classList.contains('current')){
+                index = el.getAttribute('data-index');
+            };
+        })
         
+        const todo = new Todo(titleInputEl.value, dueInputEl.value, priorityInputeEl.value);
+
+        Storage.saveTodo(todo, index);
+        showTodos(index);
     })
 
 }
+
 
 
 const renderAddTodo = () => {
@@ -75,6 +89,13 @@ const renderAddTodo = () => {
     addTodosButton.addEventListener('click', () => {
         createAddTodoDisplay();
         limitDueDate();
+        createNewTodo();
+
+        const closeEl = document.querySelector('.close-btn');
+
+        closeEl.addEventListener('click', ()=>{
+            popupDisplayEl.innerHTML = '';
+        })
     })
     
 }

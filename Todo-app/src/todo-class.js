@@ -1,3 +1,11 @@
+class Todo{
+    constructor(title, due, priority){
+        this.title = title;
+        this.due = due;
+        this.priority = priority;
+    }
+}
+
 class TodoDOMElement {
     constructor(title, due, priority, index){
         this.title = title;
@@ -52,4 +60,4 @@ class TodoDOMElement {
     }
 }
 
-export { TodoDOMElement }
+export { TodoDOMElement, Todo }

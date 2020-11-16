@@ -30,7 +30,6 @@ const addProject = () => {
 
         Storage.saveProject(project);
         projectDisplay.appendChild(div.div)
-        console.log(project)
     } else {
         console.log('Duplicate Project')
     }

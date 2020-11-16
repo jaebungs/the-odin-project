@@ -32,9 +32,9 @@ class Storage {
 
     // Handle todos in a Project
     static getTodos(index){
-        const targetProject = this.getProjects()[index];
+        const targetProject = this.getProjects()[index].todos;
 
-        return targetProject.todos
+        return targetProject
     }
 
     static saveTodo(todo, index){
