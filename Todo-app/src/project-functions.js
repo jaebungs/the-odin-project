@@ -3,7 +3,7 @@ import { Project, ProjectDOMElement } from './project-class.js'
 
 const projectAddFormEl = document.getElementById('project-add-form');
 
-// check if there is duplicated project title.
+// check if there is duplicated project title in localStorage.
 const validation = (el) => {
     let projects = Storage.getProjects();
 
@@ -35,7 +35,7 @@ const addProject = () => {
     }
 }
 
-// EventListener for Add project form
+// EventListener for Add new project form
 const projectDisplayListener = () => {
     projectAddFormEl.addEventListener('submit', (e)=>{
         e.preventDefault();

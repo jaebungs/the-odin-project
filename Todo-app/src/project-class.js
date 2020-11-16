@@ -26,7 +26,7 @@ class Project {
     }
 }
 
-// Class for DOM manipulation - display list of projects
+// Class for each project DOM element
 class ProjectDOMElement {
     constructor(title, index){
         this.title = title;
