@@ -1,5 +1,5 @@
 class Storage {
-    //Get project
+    //Handle Projects
     static getProjects(){
         let projects
 
@@ -13,20 +13,36 @@ class Storage {
     }
 
     static saveProject(project){
-        let projects = this.getProjects();
+        const projects = this.getProjects();
 
         projects.push(project);
         localStorage.setItem('todoApp', JSON.stringify(projects));
     }
 
     static removeProject(target){
-        let projects = this.getProjects();
+        const projects = this.getProjects();
 
-        let index = projects.findIndex((el) => {
+        const index = projects.findIndex((el) => {
             return el.title == target;
         });
 
         projects.splice(index, 1);
+        localStorage.setItem('todoApp', JSON.stringify(projects));
+    }
+
+    // Handle todos in a Project
+    static getTodos(index){
+        const targetProject = this.getProjects()[index];
+
+        return targetProject.todos
+    }
+
+    static saveTodo(todo, index){
+        const projects = this.getProjects();
+
+        // Add todo to todos in specific proejct
+        projects[index].todos.push(todo);
+
         localStorage.setItem('todoApp', JSON.stringify(projects));
     }
 

@@ -18,7 +18,6 @@ class Project {
         if (index > -1) {
             this.todos.splice(index, 1);
         };
-
     }
 
     getTodos() {
@@ -34,25 +33,25 @@ class ProjectDOMElement {
 
         this.div = document.createElement('div');
         this.h3 = document.createElement('h3');
-        this.deletButton = document.createElement('button');
+        this.deleteButton = document.createElement('button');
 
         this.div.classList.add('project-container');
         this.h3.classList.add('project-title');
-        this.deletButton.classList.add('btn', 'project-delet-btn');
+        this.deleteButton.classList.add('btn', 'project-delet-btn');
 
         this.div.setAttribute('data-index', index);
 
         this.h3.textContent = title;
-        this.deletButton.textContent = 'Delet';
+        this.deleteButton.textContent = 'Delete';
 
-        this.deletButton.onclick = this.onClickDelet.bind(this);
+        this.deleteButton.onclick = this.onClickDelete.bind(this);
 
         this.div.appendChild(this.h3);
-        this.div.appendChild(this.deletButton);
+        this.div.appendChild(this.deleteButton);
     }
 
      //Delete project when clicked
-    onClickDelet() {
+    onClickDelete() {
         const projectDisplay = document.querySelector('.project-display-container');
 
         Storage.removeProject(this.title);

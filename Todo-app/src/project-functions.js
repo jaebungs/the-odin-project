@@ -5,27 +5,28 @@ const projectAddFormEl = document.getElementById('project-add-form');
 
 // check if there is duplicated project title in localStorage.
 const validation = (el) => {
-    let projects = Storage.getProjects();
+    const projects = Storage.getProjects();
 
-    let index = projects.findIndex((project) => {
+    const index = projects.findIndex((project) => {
         return project.title === el
     })
 
     return index
 }
 
-//Add new project to Localstorage
+//Add new project to Localstorage and display
 const addProject = () => {
     const projectDisplay = document.querySelector('.project-display-container');
     const projectAddInput = document.getElementById('project-add').value;
 
     if (validation(projectAddInput) === -1) {
-        let numberOfProjects = Storage.getProjects().length;
+        const numberOfProjects = Storage.getProjects().length;
+
         // instantiate and save to LocalStorage
-        let project = new Project(projectAddInput);
+        const project = new Project(projectAddInput);
 
         // create elements for new project
-        let div = new ProjectDOMElement(projectAddInput, numberOfProjects+1);
+        const div = new ProjectDOMElement(projectAddInput, numberOfProjects);
 
         Storage.saveProject(project);
         projectDisplay.appendChild(div.div)

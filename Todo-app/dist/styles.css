@@ -31,6 +31,7 @@ main{
 
 .project-title{
     margin-right: 20px;
+    cursor: pointer;
 }
 
 .project-add-input {
@@ -100,10 +101,7 @@ main{
 }
 
 /* Toggle */
-.slide-show {
-    transition: 1s ease-out;
-    overflow:hidden;
-}
+
 
 .close-btn {
     display: flex;
