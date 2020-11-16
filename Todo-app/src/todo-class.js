@@ -1,8 +1,11 @@
+import { Storage } from './storage.js'
+
 class Todo{
     constructor(title, due, priority){
         this.title = title;
         this.due = due;
         this.priority = priority;
+        this.done = false;
     }
 }
 
@@ -11,6 +14,7 @@ class TodoDOMElement {
         this.title = title;
         this.due = due;
         this.priority = priority;
+        this.index = index;
 
         this.div = document.createElement('div');
         this.priorityDiv = document.createElement('div');
@@ -56,7 +60,17 @@ class TodoDOMElement {
         
     }
     onClickDelete(){
-        
+        const todosDisplayEl = document.querySelector('.todo-display-container');
+        const projectContainerEls = document.querySelectorAll('.project-container');
+        let index;
+        projectContainerEls.forEach((el) => {
+            if (el.classList.contains('current')){
+                index = el.getAttribute('data-index');
+            };
+        })
+        Storage.removeTodo(index, this.index);
+        todosDisplayEl.querySelector(`[data-index='${this.index}']`).remove();
+
     }
 }
 

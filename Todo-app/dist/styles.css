@@ -48,6 +48,10 @@ main{
     font-size: 1.3rem;
 }
 
+.current {
+    border-bottom: 2px solid #fff;
+}
+
 /* Todo Add button */
 
 .add-todo-btn {

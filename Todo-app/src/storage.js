@@ -46,5 +46,12 @@ class Storage {
         localStorage.setItem('todoApp', JSON.stringify(projects));
     }
 
+    static removeTodo(index, todoIndex){
+        const projects = this.getProjects();
+
+        projects[index].todos.splice(todoIndex, 1);
+        localStorage.setItem('todoApp', JSON.stringify(projects));
+    }
+
 } 
 export { Storage }

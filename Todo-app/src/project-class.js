@@ -50,7 +50,7 @@ class ProjectDOMElement {
         this.div.appendChild(this.deleteButton);
     }
 
-     //Delete project when clicked
+     //Delete project from DOM and localStorage when clicked
     onClickDelete() {
         const projectDisplay = document.querySelector('.project-display-container');
 
