@@ -26,11 +26,12 @@ main{
 .project-container{
     display: flex;
     align-items: center;
-    margin: 0 10px;
+    margin: 15px 0;
+    padding: 10px 0;
 }
 
 .project-title{
-    margin-right: 20px;
+    margin: 0 20px;
     cursor: pointer;
 }
 
@@ -71,20 +72,30 @@ main{
 /* todo section */
 
 .todo-display-container{
-    padding: 50px 80px;
+    padding: 50px;
     width: 100%;
 }
 
 .todo-container{
     display: flex;
     align-items: center;
+    margin: 18px 0;
+    width: 100%;
 }
 
 .todo-container > div {
+    float: left;
     margin: 0 20px;
 }
+
+.priority-display {
+    margin-right: 5px !important;
+    margin-left: 0 !important;
+}
+
 .todo-container > button {
-    justify-content: flex-end;
+    float: right;
+    width: 80px;
     margin: 0 5px;
 }
 

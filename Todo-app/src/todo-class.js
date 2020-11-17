@@ -1,5 +1,5 @@
 import { Storage } from './storage.js'
-import { createAddTodoDisplay, closeAddTodo } from './display-add-todo.js'
+import { createAddTodoDisplay, closeAddTodo, formValidation } from './display-add-todo.js'
 
 class Todo{
     constructor(title, due, priority){
@@ -92,7 +92,7 @@ class TodoDOMElement {
 
         createAddTodoDisplay();
         closeAddTodo();
-        
+        if (!formValidation) return
         const formEl = document.querySelector('.input-form');
         const titleInputEl = document.getElementById('title');
         const dueInputEl = document.getElementById('date');

@@ -72,13 +72,25 @@ const createNewTodo = () => {
                 index = el.getAttribute('data-index');
             };
         })
-        
-        const todo = new Todo(titleInputEl.value, dueInputEl.value, priorityInputeEl.value);
+        if (formValidation()) {
+        const todo = new Todo(titleInputEl.value.trim(), dueInputEl.value.trim(), priorityInputeEl.value.trim());
 
         Storage.saveTodo(todo, index);
         showTodos(index);
-    })
+        }
+    });
+}
 
+const formValidation = () => {
+    const titleInputEl = document.getElementById('title');
+    const dueInputEl = document.getElementById('date');
+    const priorityInputeEl = document.getElementById('priority');
+
+    if (titleInputEl.value.trim() && dueInputEl.value.trim() && priorityInputeEl.value.trim()){
+        return true
+    }   else {
+        return false
+    }
 }
 
 const closeAddTodo = () => {
@@ -87,9 +99,8 @@ const closeAddTodo = () => {
 
         closeEl.addEventListener('click', ()=>{
             popupDisplayEl.innerHTML = '';
-        })
+        });
 }
-
 
 const renderAddTodo = () => {
     const addTodosButton = document.querySelector('.add-todo-btn');
@@ -97,10 +108,8 @@ const renderAddTodo = () => {
     addTodosButton.addEventListener('click', () => {
         createAddTodoDisplay();
         createNewTodo();
-
         closeAddTodo();
-    })
-    
+    });
 }
 
-export { renderAddTodo, createAddTodoDisplay, closeAddTodo }
+export { renderAddTodo, createAddTodoDisplay, closeAddTodo, formValidation }
