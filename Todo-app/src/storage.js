@@ -1,10 +1,15 @@
 class Storage {
     //Handle Projects
     static getProjects(){
-        let projects
+        let projects = [{
+            title: "Default"
+            ,todos: []
+        }]
 
-        if (!localStorage.getItem('todoApp')){
-            projects = [];
+        if (!localStorage.getItem('todoApp') ){
+            // When there is no 'todoApp' item in localStorage, make and add Default
+            localStorage.setItem('todoApp', JSON.stringify(projects));
+            projects = JSON.parse(localStorage.getItem('todoApp'));
         } else {
             projects = JSON.parse(localStorage.getItem('todoApp'));
         }
@@ -13,14 +18,15 @@ class Storage {
     }
 
     static saveProject(project){
-        const projects = this.getProjects();
+        const projects = JSON.parse(localStorage.getItem('todoApp'));
 
         projects.push(project);
         localStorage.setItem('todoApp', JSON.stringify(projects));
     }
 
     static removeProject(target){
-        const projects = this.getProjects();
+        const projects = JSON.parse(localStorage.getItem('todoApp'));;
+        const todoContainerEl = document.querySelector('.todos-container');
 
         const index = projects.findIndex((el) => {
             return el.title == target;
@@ -28,12 +34,12 @@ class Storage {
 
         projects.splice(index, 1);
         localStorage.setItem('todoApp', JSON.stringify(projects));
+        todoContainerEl.innerHTML = 'Project deleted, please choose other project'  
     }
 
     // Handle todos in a Project
     static getTodos(index){
         const targetProject = this.getProjects()[index].todos;
-
         return targetProject
     }
 

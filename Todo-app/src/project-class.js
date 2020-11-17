@@ -6,23 +6,6 @@ class Project {
         this.title = title,
         this.todos = todos
     }
-
-    // addTodoToProject(todo){
-    //     this.todos.push(todo);
-    // }
-
-    // removeTodoInProject(todo){
-    //     let index = this.todos.findIndex((list) => {
-    //         return list.title == todo;
-    //     });
-    //     if (index > -1) {
-    //         this.todos.splice(index, 1);
-    //     };
-    // }
-
-    // getTodos() {
-    //     return this.todos
-    // }
 }
 
 // Class for each project DOM element
@@ -54,8 +37,12 @@ class ProjectDOMElement {
     onClickDelete() {
         const projectDisplay = document.querySelector('.project-display-container');
 
-        Storage.removeProject(this.title);
-        projectDisplay.querySelector(`[data-index='${this.index}']`).remove()
+        if (Storage.getProjects().length > 1) {
+            Storage.removeProject(this.title);
+            projectDisplay.querySelector(`[data-index='${this.index}']`).remove()
+        }else {
+            alert('At least 1 project is required');
+        }
     }
 
 }

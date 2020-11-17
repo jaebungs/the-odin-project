@@ -34,7 +34,7 @@ const addProject = () => {
         Storage.saveProject(project);
         projectDisplay.appendChild(div.div);
         showTodosInClickedProject();
-
+        document.getElementById('project-add').value = '';
     } else {
         console.log('Duplicate Project')
     }

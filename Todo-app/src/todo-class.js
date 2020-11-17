@@ -1,5 +1,7 @@
 import { Storage } from './storage.js'
 import { createAddTodoDisplay, closeAddTodo, formValidation } from './display-add-todo.js'
+import { showTodos } from './show-todos.js'
+
 
 class Todo{
     constructor(title, due, priority){
@@ -109,6 +111,7 @@ class TodoDOMElement {
         formEl.addEventListener('submit', (e)=>{
             e.preventDefault();
             Storage.modifyTodo(index, this.index, titleInputEl.value, priorityInputeEl.value, dueInputEl.value, todo.done);
+            showTodos(index)
             popupDisplayEl.innerHTML = '';
         })
 
