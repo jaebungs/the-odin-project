@@ -1,5 +1,7 @@
 import { Storage } from './storage.js'
 import { Project, ProjectDOMElement } from './project-class.js'
+import { showTodosInClickedProject } from './show-todos.js'
+
 
 const projectAddFormEl = document.getElementById('project-add-form');
 
@@ -29,7 +31,9 @@ const addProject = () => {
         const div = new ProjectDOMElement(projectAddInput, numberOfProjects);
 
         Storage.saveProject(project);
-        projectDisplay.appendChild(div.div)
+        projectDisplay.appendChild(div.div);
+        showTodosInClickedProject();
+
     } else {
         console.log('Duplicate Project')
     }

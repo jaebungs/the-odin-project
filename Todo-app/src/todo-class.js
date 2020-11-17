@@ -1,4 +1,5 @@
 import { Storage } from './storage.js'
+import { createAddTodoDisplay, closeAddTodo } from './display-add-todo.js'
 
 class Todo{
     constructor(title, due, priority){
@@ -72,7 +73,6 @@ class TodoDOMElement {
         let todo = Storage.getTodos(index)[this.index];
 
         Storage.modifyTodo(index, this.index, todo.title, todo.priority, todo.due, !todo.done);
-        console.log(todo.done);
         if (todo.done){
             todosDisplayEl.querySelector(`[data-index='${this.index}']`).classList.remove('done');
         } else {
@@ -81,7 +81,33 @@ class TodoDOMElement {
     }
 
     onClickModify(){
+        const projectContainerEls = document.querySelectorAll('.project-container');
+        let index;
+
+        projectContainerEls.forEach((el) => {
+            if (el.classList.contains('current')){
+                index = el.getAttribute('data-index');
+            };
+        })
+
+        createAddTodoDisplay();
+        closeAddTodo();
         
+        const formEl = document.querySelector('.input-form');
+        const titleInputEl = document.getElementById('title');
+        const dueInputEl = document.getElementById('date');
+        const priorityInputeEl = document.getElementById('priority');
+
+        let todo = Storage.getTodos(index)[this.index];
+        
+        titleInputEl.value = todo.title;
+        dueInputEl.value = todo.due;
+        priorityInputeEl.value = todo.priority;
+
+        formEl.addEventListener('submit', ()=>{
+            Storage.modifyTodo(index, this.index, titleInputEl.value, priorityInputeEl.value, dueInputEl.value, todo.done);
+        })
+
     }
     
     onClickDelete(){

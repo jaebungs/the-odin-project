@@ -2,9 +2,9 @@ import { Storage } from './storage.js'
 import { Todo } from './todo-class.js'
 import { showTodos } from './show-todos.js'
 
-const popupDisplayEl = document.querySelector('.popup-display-container');
-
 const createAddTodoDisplay = () => {
+    const popupDisplayEl = document.querySelector('.popup-display-container');
+
     popupDisplayEl.style.border = '2px solid #000';
 
     popupDisplayEl.innerHTML = `
@@ -36,7 +36,7 @@ const createAddTodoDisplay = () => {
     `
 
     popupDisplayEl.classList.add('slide-show');
-
+    limitDueDate()
 }
 
 const limitDueDate = () => {
@@ -81,6 +81,14 @@ const createNewTodo = () => {
 
 }
 
+const closeAddTodo = () => {
+    const closeEl = document.querySelector('.close-btn');
+    const popupDisplayEl = document.querySelector('.popup-display-container');
+
+        closeEl.addEventListener('click', ()=>{
+            popupDisplayEl.innerHTML = '';
+        })
+}
 
 
 const renderAddTodo = () => {
@@ -88,16 +96,11 @@ const renderAddTodo = () => {
 
     addTodosButton.addEventListener('click', () => {
         createAddTodoDisplay();
-        limitDueDate();
         createNewTodo();
 
-        const closeEl = document.querySelector('.close-btn');
-
-        closeEl.addEventListener('click', ()=>{
-            popupDisplayEl.innerHTML = '';
-        })
+        closeAddTodo();
     })
     
 }
 
-export { renderAddTodo }
+export { renderAddTodo, createAddTodoDisplay, closeAddTodo }
