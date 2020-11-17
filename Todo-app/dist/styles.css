@@ -69,6 +69,10 @@ main{
     font-size: 45px;
 }
 
+.add-container {
+    padding: 15px;
+    border: 1px solid #000;
+}
 /* todo section */
 
 .todo-display-container{

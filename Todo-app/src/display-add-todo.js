@@ -5,8 +5,6 @@ import { showTodos } from './show-todos.js'
 const createAddTodoDisplay = () => {
     const popupDisplayEl = document.querySelector('.popup-display-container');
 
-    popupDisplayEl.style.border = '2px solid #000';
-
     popupDisplayEl.innerHTML = `
         <div class="add-container">
             <h2>New Todo</h2>
@@ -35,7 +33,6 @@ const createAddTodoDisplay = () => {
         </div>
     `
 
-    popupDisplayEl.classList.add('slide-show');
     limitDueDate()
 }
 
@@ -61,6 +58,8 @@ const createNewTodo = () => {
     const dueInputEl = document.getElementById('date');
     const priorityInputeEl = document.getElementById('priority');
     const projectContainerEls = document.querySelectorAll('.project-container');
+    const popupDisplayEl = document.querySelector('.popup-display-container');
+
     let index;
 
     formEl.addEventListener('submit', (e) => {
@@ -77,6 +76,7 @@ const createNewTodo = () => {
 
         Storage.saveTodo(todo, index);
         showTodos(index);
+        popupDisplayEl.innerHTML = '';
         }
     });
 }

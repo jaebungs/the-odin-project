@@ -82,6 +82,7 @@ class TodoDOMElement {
 
     onClickModify(){
         const projectContainerEls = document.querySelectorAll('.project-container');
+        const popupDisplayEl = document.querySelector('.popup-display-container');
         let index;
 
         projectContainerEls.forEach((el) => {
@@ -98,6 +99,7 @@ class TodoDOMElement {
         const dueInputEl = document.getElementById('date');
         const priorityInputeEl = document.getElementById('priority');
 
+
         let todo = Storage.getTodos(index)[this.index];
         
         titleInputEl.value = todo.title;
@@ -107,6 +109,7 @@ class TodoDOMElement {
         formEl.addEventListener('submit', (e)=>{
             e.preventDefault();
             Storage.modifyTodo(index, this.index, titleInputEl.value, priorityInputeEl.value, dueInputEl.value, todo.done);
+            popupDisplayEl.innerHTML = '';
         })
 
     }
