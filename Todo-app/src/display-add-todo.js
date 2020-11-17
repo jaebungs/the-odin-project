@@ -73,7 +73,7 @@ const createNewTodo = () => {
             };
         })
         if (formValidation()) {
-        const todo = new Todo(titleInputEl.value.trim(), dueInputEl.value.trim(), priorityInputeEl.value.trim());
+        const todo = new Todo(titleInputEl.value.trim(), dueInputEl.value, priorityInputeEl.value);
 
         Storage.saveTodo(todo, index);
         showTodos(index);
@@ -83,10 +83,8 @@ const createNewTodo = () => {
 
 const formValidation = () => {
     const titleInputEl = document.getElementById('title');
-    const dueInputEl = document.getElementById('date');
-    const priorityInputeEl = document.getElementById('priority');
 
-    if (titleInputEl.value.trim() && dueInputEl.value.trim() && priorityInputeEl.value.trim()){
+    if (titleInputEl.value.trim()){
         return true
     }   else {
         return false

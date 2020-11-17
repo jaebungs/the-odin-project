@@ -104,7 +104,8 @@ class TodoDOMElement {
         dueInputEl.value = todo.due;
         priorityInputeEl.value = todo.priority;
 
-        formEl.addEventListener('submit', ()=>{
+        formEl.addEventListener('submit', (e)=>{
+            e.preventDefault();
             Storage.modifyTodo(index, this.index, titleInputEl.value, priorityInputeEl.value, dueInputEl.value, todo.done);
         })
 
@@ -120,7 +121,6 @@ class TodoDOMElement {
                 index = el.getAttribute('data-index');
             };
         })
-
 
         Storage.removeTodo(index, this.index);
         todosDisplayEl.querySelector(`[data-index='${this.index}']`).remove();
