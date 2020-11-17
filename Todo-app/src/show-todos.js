@@ -4,14 +4,14 @@ const todosContainer = document.querySelector('.todos-container');
 
 const showTodos = (index = 0) => {
     let todos = Storage.getTodos(index);
-    todosContainer.innerHTML = ''
+    todosContainer.innerHTML = '';
     projectReference(index);
     
     if (todos.length > 0) {
         todos.forEach((todo, todoIndex) => {
-            let todoEl = new TodoDOMElement(todo.title, todo.due, todo.priority, todoIndex);
-    
-            todosContainer.appendChild(todoEl.div)
+            let todoEl = new TodoDOMElement(todo.title, todo.due, todo.priority, todoIndex, todo.done);
+            console.log(`${todoIndex}-${todo.done}`);
+            todosContainer.appendChild(todoEl.div);
         });
     } else {
         const emptyDiv = document.createElement('div');

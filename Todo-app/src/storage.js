@@ -53,5 +53,18 @@ class Storage {
         localStorage.setItem('todoApp', JSON.stringify(projects));
     }
 
+    static modifyTodo(index, todoIndex, ...changes){
+        const projects = this.getProjects();
+        const change = [...changes];
+        projects[index].todos[todoIndex] = {
+            title: `${change[0]}`,
+            priority: `${change[1]}`,
+            due:`${change[2]}`,
+            done: change[3]
+        }
+
+        localStorage.setItem('todoApp', JSON.stringify(projects));
+    }
+
 } 
 export { Storage }
