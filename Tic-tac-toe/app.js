@@ -140,27 +140,9 @@ const displayBoard = () => {
     // Show player's mark
     const markDisplay = (e, mark) => {
         e.target.innerText = mark;
-    }
-
-    
+    } 
 
     return {createBoard, nameDisplay, scoreDisplay, markDisplay}
-}
-
-
-const minimax = () => {
-    const grids = grids();
-    let board = grids.getBoard();
-    let emptyCells = [];
-
-    for (let i=0; i < 3; i++){
-        for (let j=0; j<3; j++){
-            if (board[i][j] === ''){
-                emptyCell.push(board[i][j]);
-            }
-        }
-    }
-
 }
 
 const game = (() => {
@@ -248,12 +230,33 @@ const game = (() => {
             let emptyCell = randomComputerMove();
             let randomNumber = Math.floor(Math.random() * emptyCell.length)
             
-            console.log(emptyCell[randomNumber].row)
             grid.setCell(emptyCell[randomNumber].row, emptyCell[randomNumber].col, player2.mark);
             markSpecificPlace(emptyCell[randomNumber].row, emptyCell[randomNumber].col);
             turnCheck = !turnCheck;
-            console.log(grid.getBoard()); //for check
         }
+    }
+
+    const minimax = (game, ) => {
+        let newBoard = grid.getBoard();
+        let emptyCells = [];
+        let scores = [];
+        let moves = [];
+
+
+        for (let row=0; row < 3; row++){
+            for (let col=0; col<3; col++){
+                if (newBoard.getCell(row, col) === ''){
+                    emptyCells.push({row, col});
+                }
+            }
+        }
+        
+        for (let i=0; i < emptyCells.length; i++){
+            if (!turnCheck) {
+                
+            }
+        }
+
     }
 
     // Show winner, increase score and display 

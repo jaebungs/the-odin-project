@@ -57,7 +57,7 @@ const displayReserve = () => {
             </div>
         </div>
     `
-
+    
     return html
 }
 
