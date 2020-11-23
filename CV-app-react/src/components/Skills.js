@@ -25,7 +25,6 @@ export default class Skills extends React.Component {
 
     handleAddMode() {
         this.setState({ addNewSkill: true });
-        console.log('Add new skill!');
     }
     // handleSkillEditMode(skillToEdit) {
     //     this.setState({  });
@@ -57,10 +56,11 @@ export default class Skills extends React.Component {
     }
 
     handleDeleteSkill(skillToRemove){
-        this.setState({
-            skills: this.state.skills.filter((skill) => {skill.name !== skillToRemove})
+        this.setState((prevState) => {
+            return {
+                skills: prevState.skills.filter((skill) => skill.name !== skillToRemove)
+            }
         })
-        console.log(skillToRemove)
     }
 
     render() {
