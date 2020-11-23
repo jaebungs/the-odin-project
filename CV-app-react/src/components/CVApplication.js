@@ -1,5 +1,6 @@
 import React from 'react';
-import Personal from './Personal'
+import Personal from './Personal';
+import Skills from './Skills'
 
 export default class CVApplication extends React.Component {
 
@@ -7,7 +8,7 @@ export default class CVApplication extends React.Component {
         return (
             <div>
                 <Personal />
-
+                <Skills />
             </div>
         )
     }
