@@ -18,7 +18,6 @@ export default class Skills extends React.Component {
             addNewSkill: false
         };
         this.handleAddMode = this.handleAddMode.bind(this);
-        this.handleChange = this.handleChange.bind(this);
         this.handleAddSubmit = this.handleAddSubmit.bind(this);
         this.handleDeleteSkill = this.handleDeleteSkill.bind(this);
     }
@@ -26,15 +25,12 @@ export default class Skills extends React.Component {
     handleAddMode() {
         this.setState({ addNewSkill: true });
     }
-    // handleSkillEditMode(skillToEdit) {
-    //     this.setState({  });
-    // }
 
-    handleChange(e){
-        this.setState({ 
-            [e.target.name]: e.target.value
-        });
-    }
+    // handleSkillEdit(e){
+    //     this.setState({ 
+    //         [e.target.name]: e.target.value
+    //     });
+    // }
     
     handleAddSubmit(e){
         e.preventDefault();
@@ -101,8 +97,6 @@ export default class Skills extends React.Component {
                 }
             </div>
         )
-
-        
 
         return (
             viewSkillsTemplate

@@ -23,7 +23,7 @@ export default class Personal extends React.Component {
 
     handleChange(e){
         this.setState({ 
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value.trim()
         });
     }
     
@@ -44,10 +44,15 @@ export default class Personal extends React.Component {
                 <button onClick={this.handleEditMode}>Edit</button>
                 <h4>Email</h4>
                 <p>{email}</p>
-                <h4>Github</h4>
-                <p>{github}</p>
-                <h4>LinkedIn</h4>
-                <p>{linkedIn}</p>
+                {github !== '' && <div>
+                    <h4>Github</h4>
+                    <p>{github !== '' && github}</p>
+                </div>}
+                {linkedIn !== '' && <div>
+                    <h4>LinkedIn</h4>
+                    <p>{linkedIn !== '' && linkedIn}</p>
+                </div>}
+                
             </div>
         )
 
