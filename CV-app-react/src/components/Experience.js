@@ -35,21 +35,11 @@ export default class Experience extends React.Component{
         this.handleAddSubmit = this.handleAddSubmit.bind(this);
         this.handlePresentClick = this.handlePresentClick.bind(this);
         this.handleDeleteExp = this.handleDeleteExp.bind(this);
-        this.handleExpEdit = this.handleExpEdit.bind(this);
     }
     // Methods for adding new experience
     handleAddExp(){
         this.setState({
             addNewExp: true
-        })
-    }
-
-    handleCancel(){
-        this.setState((prevState) => {
-            return {
-                experience: prevState.experience,
-                addNewExp: false
-            }
         })
     }
 
@@ -83,18 +73,25 @@ export default class Experience extends React.Component{
         })
     }
 
-    // Methods for each experience
-    handleExpEdit(e){
-
+    handleCancel(){
+        this.setState((prevState) => {
+            return {
+                experience: prevState.experience,
+                addNewExp: false
+            }
+        })
     }
+
+    // Methods for each experience
+
 
     handleDeleteExp(expToRemove){
         this.setState((prevState)=>{ 
             return {
                 experience: prevState.experience.filter((_, i) => i !== expToRemove)
             }})
-
     }
+
 
     render(){
         const { experience, addNewExp } = this.state;
@@ -120,14 +117,14 @@ export default class Experience extends React.Component{
             </div>
         )
 
-        const template = (
+        const viewTemplate = (
             <div className="experience-container">
                 <h3>Experience</h3>
                 <button className="add-btn" onClick={this.handleAddExp}>+</button>
                 {addNewExp && addTemplate}
                 {
                     experience.map((exp, index) => (
-                        <ExpIndividual 
+                            <ExpIndividual 
                             key={index}
                             expIndex={index}
                             expCompany={exp.company}
@@ -136,16 +133,15 @@ export default class Experience extends React.Component{
                             expEnd={exp.end}
                             expPresent={exp.present}
                             expResp={exp.responsibilities}
-                            handleExpEdit={this.handleExpEdit}
                             handleDeleteExp={this.handleDeleteExp}
-                        />
+                        />   
                     ))
                 }
             </div>
         )
 
         return(
-            template
+            viewTemplate
         )
     }
 }

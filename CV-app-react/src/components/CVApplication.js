@@ -3,6 +3,7 @@ import Personal from './Personal';
 import Skills from './Skills';
 import Summary from './Summary';
 import Experience from './Experience';
+import Education from './Education';
 
 export default class CVApplication extends React.Component {
 
@@ -13,6 +14,7 @@ export default class CVApplication extends React.Component {
                 <Skills />
                 <Summary />
                 <Experience />
+                <Education />
             </div>
         )
     }
