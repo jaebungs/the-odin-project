@@ -8,7 +8,9 @@ export default class EducationIndividual extends React.Component{
             <div className="education-individual-container">
                 <div>{ education.start } - { education.end }</div>
                 <div>
-                    <button onClick={ ()=> this.props.handleDeleteEdu(this.props.eduIndex) }>X</button>
+                    <button onClick={ ()=> this.props.handleDeleteEdu(this.props.eduIndex)}
+                        className="btn"
+                    >X</button>
                     <p>{education.major}</p>
                     <p>{education.school}</p>
                     <p>{education.detail}</p>

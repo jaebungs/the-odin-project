@@ -9,12 +9,17 @@ export default class CVApplication extends React.Component {
 
     render() {
         return (
-            <div>
-                <Personal />
-                <Skills />
-                <Summary />
-                <Experience />
-                <Education />
+            <div className="components-container">
+                <header>CV App</header>
+                <div className="left-container">
+                    <Personal />
+                    <Skills />
+                </div>
+                <div className="right-container">
+                    <Summary />
+                    <Experience />
+                    <Education />
+                </div>
             </div>
         )
     }

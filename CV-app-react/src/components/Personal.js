@@ -40,8 +40,10 @@ export default class Personal extends React.Component {
         const viewPersonalTemplate = (
             <div>
                 <h1>{first} {middle} {last}</h1>
-                <h3>Personal Info</h3>
-                <button onClick={this.handleEditMode}>Edit</button>
+                <h3 className="section-container">Personal Info</h3>
+                <button onClick={this.handleEditMode}
+                    className="left btn edit"
+                >Edit</button>
                 <h4>Email</h4>
                 <p>{email}</p>
                 {github !== '' && <div>
@@ -111,7 +113,7 @@ export default class Personal extends React.Component {
                         onChange={this.handleChange}
                     />
 
-                    <button type="submit">
+                    <button type="submit" className="left btn">
                         Submit
                     </button>
 

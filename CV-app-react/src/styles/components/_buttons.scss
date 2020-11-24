@@ -1,0 +1,30 @@
+.btn {
+    border: none;
+    background: #fff;
+    font-size: 1.5rem;
+    opacity: 0.4;
+}
+
+.btn:hover {
+    opacity: 1;
+}
+
+.edit {
+    position: relative;
+    left: 15rem;
+}
+
+.left {
+    background: $left-background;
+}
+
+.edit-right {
+    position: relative;
+    left: 80%;
+}
+
+.left--delete {
+    position: relative;
+    bottom: 4.8rem;
+    left: 13rem;
+}

@@ -75,15 +75,21 @@ export default class Skills extends React.Component {
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </select>
-                    <button type="submit" className="submit-btn">Add</button>
+                    <button 
+                        type="submit" 
+                        className="left btn"
+                    >Add</button>
                 </form>
             </div>
         )
 
         const viewSkillsTemplate = (
             <div>
-                <h3>Skills</h3>
-                <button onClick={this.handleAddMode}>+</button>
+                <h3 className="section-container">Skills</h3>
+                <button 
+                    onClick={this.handleAddMode}
+                    className="left btn edit"
+                >+</button>
                 {addNewSkill && addSkillsTemplate}
                 {
                     skills.map((skill, index) => (

@@ -35,7 +35,10 @@ export default class Summary extends React.Component{
 
         const viewTemplate = (
             <div>
-                <button className="add-btn" onClick={this.handleSummaryEdit}>Edit</button>
+                <h3 className="section-container">Summary</h3>
+                <button className="btn edit-right" 
+                    onClick={this.handleSummaryEdit}
+                >Edit</button>
                 <p className="summary-text">{summary}</p>
             </div>
         )
@@ -44,7 +47,9 @@ export default class Summary extends React.Component{
             <div>
                 <label htmlFor="summary">Summary Edit:</label>
                 <textarea id="summary" name="summary" onChange={this.handleChange} value={summary}></textarea>
-                <button onClick={this.handleSubmit}>Update</button>
+                <button onClick={this.handleSubmit}
+                    className="btn"
+                >Update</button>
             </div>
         )
 

@@ -111,16 +111,18 @@ export default class Experience extends React.Component{
                     <input type="checkbox" id="untilPresent" name="present" checked={this.state.presentChecked} onChange={this.handlePresentClick} />
                     <label htmlFor="responsibilities">Responsibilities:</label>
                     <textarea name="responsibilities" id="responsibilities" />
-                    <button type="submit" className="add-btn">Add</button>
-                    <button className="add-btn" onClick={this.handleCancel}>Cancel</button>
+                    <button type="submit" className="btn">Add</button>
+                    <button className="btn" onClick={this.handleCancel}>Cancel</button>
                 </form>
             </div>
         )
 
         const viewTemplate = (
             <div className="experience-container">
-                <h3>Experience</h3>
-                <button className="add-btn" onClick={this.handleAddExp}>+</button>
+                <h3 className="section-container">Experience</h3>
+                <button className="btn edit-right" 
+                    onClick={this.handleAddExp}
+                >+</button>
                 {addNewExp && addTemplate}
                 {
                     experience.map((exp, index) => (

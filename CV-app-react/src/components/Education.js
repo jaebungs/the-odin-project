@@ -73,16 +73,16 @@ export default class Education extends React.Component{
                         />
                     <label htmlFor="detail">Detail:</label>
                     <textarea name="detail" id="detail" />
-                    <button type="submit" className="add-btn">Add</button>
-                    <button className="add-btn" onClick={this.handleCancel}>Cancel</button>
+                    <button type="submit" className="btn">Add</button>
+                    <button className="btn" onClick={this.handleCancel}>Cancel</button>
                 </form>
             </div>
         )
 
         const viewTemplate = (
             <div className="education-container">
-                <h3>Education</h3>
-                <button className="add-btn" onClick={this.handleAddEdu}>+</button>
+                <h3 className="section-container">Education</h3>
+                <button className="btn edit-right" onClick={this.handleAddEdu}>+</button>
                 {addEdu && addTemplate}
                 { education.map((edu, index) => (
                     <EducationIndividual
