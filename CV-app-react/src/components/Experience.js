@@ -1,4 +1,5 @@
 import React from 'react';
+import ExpIndividual from './ExpIndividual';
 
 export default class Experience extends React.Component{
     constructor(props){
@@ -11,6 +12,20 @@ export default class Experience extends React.Component{
                 end: '2020-12',
                 present: false,
                 responsibilities: 'exampl1'
+            },{
+                company: 'company2',
+                position: 'company2-main',
+                start: '2017-12',
+                end: '2020-12',
+                present: false,
+                responsibilities: 'exampl1'
+            },{
+                company: 'c33333',
+                position: 'c333333',
+                start: '2017-12',
+                end: '2020-12',
+                present: false,
+                responsibilities: 'exampl1'
             }],
             addNewExp: false,
             presentChecked: false
@@ -19,13 +34,16 @@ export default class Experience extends React.Component{
         this.handleCancel = this.handleCancel.bind(this);
         this.handleAddSubmit = this.handleAddSubmit.bind(this);
         this.handlePresentClick = this.handlePresentClick.bind(this);
+        this.handleDeleteExp = this.handleDeleteExp.bind(this);
+        this.handleExpEdit = this.handleExpEdit.bind(this);
     }
-
+    // Methods for adding new experience
     handleAddExp(){
         this.setState({
             addNewExp: true
         })
     }
+
     handleCancel(){
         this.setState((prevState) => {
             return {
@@ -56,7 +74,6 @@ export default class Experience extends React.Component{
             present: this.state.presentChecked,
             responsibilities: e.target.responsibilities.value.trim()
         }
-        console.log(newExp)
 
         this.setState((prevState)=>{
             return {
@@ -64,6 +81,19 @@ export default class Experience extends React.Component{
                 addNewExp: false
             }
         })
+    }
+
+    // Methods for each experience
+    handleExpEdit(e){
+
+    }
+
+    handleDeleteExp(expToRemove){
+        this.setState((prevState)=>{ 
+            return {
+                experience: prevState.experience.filter((_, i) => i !== expToRemove)
+            }})
+
     }
 
     render(){
@@ -95,7 +125,22 @@ export default class Experience extends React.Component{
                 <h3>Experience</h3>
                 <button className="add-btn" onClick={this.handleAddExp}>+</button>
                 {addNewExp && addTemplate}
-                <div>hi</div>
+                {
+                    experience.map((exp, index) => (
+                        <ExpIndividual 
+                            key={index}
+                            expIndex={index}
+                            expCompany={exp.company}
+                            expPosition={exp.position}
+                            expStart={exp.start}
+                            expEnd={exp.end}
+                            expPresent={exp.present}
+                            expResp={exp.responsibilities}
+                            handleExpEdit={this.handleExpEdit}
+                            handleDeleteExp={this.handleDeleteExp}
+                        />
+                    ))
+                }
             </div>
         )
 
