@@ -65,7 +65,7 @@ export default class Skills extends React.Component {
         const addSkillsTemplate = (
             <div>
                 <form onSubmit={this.handleAddSubmit}>
-                    <label htmlFor="skillName">Skill Name:</label>
+                    <label htmlFor="skillName">*Skill Name:</label>
                     <input type="text" id="skillName" name="skillName" required></input>
                     <label htmlFor="skillProficiency">Skill proficiency:</label>
                     <select id="skillProficiency" name="skillProficiency">
@@ -77,8 +77,8 @@ export default class Skills extends React.Component {
                     </select>
                     <button 
                         type="submit" 
-                        className="left btn"
-                    >Add</button>
+                        className="left btn-submit"
+                    >Submit</button>
                 </form>
             </div>
         )
