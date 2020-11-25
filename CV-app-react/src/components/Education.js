@@ -73,8 +73,8 @@ export default class Education extends React.Component{
                         />
                     <label htmlFor="detail">Detail:</label>
                     <textarea name="detail" id="detail" />
-                    <button type="submit" className="btn">Add</button>
-                    <button className="btn" onClick={this.handleCancel}>Cancel</button>
+                    <button type="submit" className="btn-submit--right">Add</button>
+                    <button className="btn-submit--right" onClick={this.handleCancel}>Cancel</button>
                 </form>
             </div>
         )

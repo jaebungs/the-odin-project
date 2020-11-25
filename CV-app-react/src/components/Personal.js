@@ -113,7 +113,7 @@ export default class Personal extends React.Component {
                         onChange={this.handleChange}
                     />
 
-                    <button type="submit" className="left btn-submit">
+                    <button type="submit" className="left btn-submit--left">
                         Submit
                     </button>
 

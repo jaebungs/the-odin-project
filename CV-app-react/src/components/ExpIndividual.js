@@ -4,16 +4,16 @@ export default class ExpIndividual extends React.Component{
 
     render(){
         return (
-            <div className="individual-exp-container">
-                <div className="exp-years">{ this.props.expStart } - { this.props.expEnd }</div>
-                <div className="exp-text">
-                    <button onClick={()=> this.props.handleDeleteExp(this.props.expIndex)}
-                        className="btn"
-                    >X</button>
-                    <p>{ this.props.expPosition }</p>
-                    <p>{ this.props.expCompany }</p>
+            <div className="flex-container">
+                <div className="flex-years-container">{ this.props.expStart } ~ { this.props.expEnd }</div>
+                <div className="flex-info-container">
+                    <p className="light-bold">{ this.props.expPosition }</p>
+                    <p className="italic">{ this.props.expCompany }</p>
                     <p>{ this.props.expResp }</p>
                 </div>
+                <button onClick={()=> this.props.handleDeleteExp(this.props.expIndex)}
+                    className="btn right--delete"
+                >X</button>
             </div>
         )
     }

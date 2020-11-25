@@ -77,7 +77,7 @@ export default class Skills extends React.Component {
                     </select>
                     <button 
                         type="submit" 
-                        className="left btn-submit"
+                        className="left btn-submit--left"
                     >Submit</button>
                 </form>
             </div>

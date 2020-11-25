@@ -45,10 +45,10 @@ export default class Summary extends React.Component{
 
         const editTemplate = (
             <div>
-                <label htmlFor="summary">Summary Edit:</label>
+                <label htmlFor="summary">Edit:</label>
                 <textarea id="summary" name="summary" onChange={this.handleChange} value={summary}></textarea>
                 <button onClick={this.handleSubmit}
-                    className="btn"
+                    className="btn-submit--right"
                 >Update</button>
             </div>
         )

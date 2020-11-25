@@ -99,11 +99,11 @@ export default class Experience extends React.Component{
         const addTemplate = (
             <div className="exp-add-container">
                 <form onSubmit={this.handleAddSubmit}>
-                    <label htmlFor="position">Position:</label>
+                    <label htmlFor="position">*Position:</label>
                     <input type="text" name="position" id="position" required />
-                    <label htmlFor="company">Company:</label>
+                    <label htmlFor="company">*Company:</label>
                     <input type="text" name="compnay" id="company" required />
-                    <label htmlFor="start">Start:</label>
+                    <label htmlFor="start">*Start:</label>
                     <input type="date" name="start" id="start" required />
                     <label htmlFor="end">End:</label>
                     <input type="date" name="end" id="end" disabled={this.state.presentChecked && true} />
@@ -111,8 +111,8 @@ export default class Experience extends React.Component{
                     <input type="checkbox" id="untilPresent" name="present" checked={this.state.presentChecked} onChange={this.handlePresentClick} />
                     <label htmlFor="responsibilities">Responsibilities:</label>
                     <textarea name="responsibilities" id="responsibilities" />
-                    <button type="submit" className="btn">Add</button>
-                    <button className="btn" onClick={this.handleCancel}>Cancel</button>
+                    <button type="submit" className="btn-submit--right">Add</button>
+                    <button className="btn-submit--right" onClick={this.handleCancel}>Cancel</button>
                 </form>
             </div>
         )
