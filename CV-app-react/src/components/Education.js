@@ -5,12 +5,17 @@ export default class Education extends React.Component{
     constructor(props){
         super(props)
         this.state={
+            school: '',
+            major: '',
+            start: '',
+            end: '',
+            detail: '',
             education:[{
                 school: 'Sample school name',
-                major: 'Digging',
-                start: '2000',
-                end: '2222',
-                detail: []
+                major: 'Dig all day long',
+                start: '1998-05',
+                end: '2220-12',
+                detail: ''
             }],
             addEdu: false,
             presentChecked: false
@@ -19,11 +24,27 @@ export default class Education extends React.Component{
         this.handleCancel = this.handleCancel.bind(this);
         this.handlePresentClick = this.handlePresentClick.bind(this);
         this.handleDeleteEdu = this.handleDeleteEdu.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     
     handleAddEdu(){
         this.setState((prevState)=>{
             return {
+                addEdu: !prevState.addEdu
+            }
+        })
+    }
+
+    handleSubmit(e){
+        e.preventDefault();
+        const { school, major, start, presentChecked, end, detail } = this.state;
+        const endValue = presentChecked ? 'Present' : e.target.end.value
+        const newEducation = { school,  major, start, end: endValue, detail }
+        
+        this.setState((prevState)=>{
+            return {
+                education: prevState.education.concat(newEducation),
                 addEdu: !prevState.addEdu
             }
         })
@@ -52,27 +73,33 @@ export default class Education extends React.Component{
         })
     }
 
+    handleChange(e){
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
     render(){
         const { education, addEdu } = this.state;
 
         const addTemplate = (
             <div className="education-add-container">
-                <form onSubmit={this.handleAddSubmit}>
+                <form onSubmit={this.handleSubmit}>
                     <label htmlFor="major">Major:</label>
-                    <input type="text" name="major" id="major" required />
+                    <input type="text" name="major" id="major" onChange={this.handleChange} required />
                     <label htmlFor="school">School:</label>
-                    <input type="text" name="school" id="school" required />
+                    <input type="text" name="school" id="school" onChange={this.handleChange} required />
                     <label htmlFor="start">Start:</label>
-                    <input type="date" name="start" id="start" required />
+                    <input type="date" name="start" id="start" onChange={this.handleChange} required />
                     <label htmlFor="end">End:</label>
-                    <input type="date" name="end" id="end" disabled={this.state.presentChecked && true} />
+                    <input type="date" name="end" id="end" onChange={this.handleChange} disabled={this.state.presentChecked && true} />
                     <label htmlFor="untilPresent">Present</label>
                     <input type="checkbox" id="untilPresent" name="present" 
                         checked={this.state.presentChecked} 
                         onChange={this.handlePresentClick} 
                         />
                     <label htmlFor="detail">Detail:</label>
-                    <textarea name="detail" id="detail" />
+                    <textarea name="detail" id="detail" onChange={this.handleChange} />
                     <button type="submit" className="btn-submit--right">Add</button>
                     <button className="btn-submit--right" onClick={this.handleCancel}>Cancel</button>
                 </form>

@@ -6,8 +6,8 @@ export default class Experience extends React.Component{
         super(props)
         this.state ={
             experience: [{
-                company: 'Estee Lauder',
-                position: 'Maintenance Technician',
+                company: 'A good company',
+                position: 'future software engineer',
                 start: '2017-12',
                 end: '2020-12',
                 present: false,
@@ -15,13 +15,6 @@ export default class Experience extends React.Component{
             },{
                 company: 'company2',
                 position: 'company2-main',
-                start: '2017-12',
-                end: '2020-12',
-                present: false,
-                responsibilities: 'exampl1'
-            },{
-                company: 'c33333',
-                position: 'c333333',
                 start: '2017-12',
                 end: '2020-12',
                 present: false,
