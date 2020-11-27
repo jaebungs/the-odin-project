@@ -30,6 +30,7 @@ import RBC from '../images/RBC.jpg';
 import PG from '../images/PG.jpg';
 import Amazon from '../images/Amazon.jpg';
 
+// Should've named like logo or companies
 const Brands = (props) => {
     const brands = [{
         id: 1,
@@ -39,7 +40,7 @@ const Brands = (props) => {
     {
         id: 2,
         image: Loreal,
-        name: "L'OréAl"
+        name: "L'Oréal"
     },
     {
         id: 3,
@@ -190,12 +191,13 @@ const Brands = (props) => {
                     <div 
                         key={brand.id}
                         className="brand-card"
+                        onClick={()=> {props.handleTracking(brand.id)}}
                     >
                         <img 
                             src={brand.image}
                             className="brand-logo"
                         />
-                        <p>{brand.name}</p>
+                        <p className="brand-name">{brand.name}</p>
                     </div>
                 ))
             }

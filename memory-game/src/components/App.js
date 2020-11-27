@@ -13,13 +13,14 @@ const App = () => {
 
   const resetScore = () => {
     setScore(0)
-  }
+  };
 
   useEffect(() => {
     if (score > highestScore) {
       setHighestScore(score)
     }
-  }, [score])
+  }, [score]);
+
 
   return (
     <div>

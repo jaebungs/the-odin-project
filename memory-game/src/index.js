@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import './styles/index.css';
-import './styles/App.css';
+import './styles/Header.css';
+import './styles/Brand.css';
 
 
 ReactDOM.render(
