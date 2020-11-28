@@ -4,7 +4,7 @@ Try and see how many you can remember.
 The companies are located in Toronto, Canada.  
   
 This is one of React curriculum from The Odin Project - https://www.theodinproject.com/courses/javascript/lessons/memory-card  
-Live - 
+Live - https://jaebungs.github.io/the-odin-project//memory-game/public/index  
   
 Used create-react-app for templates.  
 Practice for Hooks.
