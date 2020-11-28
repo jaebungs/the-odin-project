@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TD from '../images/TD.png';
 import Loreal from '../images/Loreal.png';
 import Telus from '../images/Telus.jpg';
@@ -32,7 +32,7 @@ import Amazon from '../images/Amazon.jpg';
 
 // Should've named like logo or companies
 const Brands = (props) => {
-    const brands = [{
+    let brands = [{
         id: 1,
         image: TD,
         name: 'TD Bank'
@@ -184,24 +184,44 @@ const Brands = (props) => {
     }
 ]
 
+const shuffleCards =(brands) => {
+    const oldBrands = [...brands];
+    let newBrands = [];
+
+    // take one obj from oldBrands and add to newBrands, render each time.
+    for (let i=0; i < brands.length; i++) {
+        let randomNumber = Math.floor(Math.random() * oldBrands.length);
+        newBrands.push(oldBrands[randomNumber]);
+        oldBrands.splice(randomNumber, 1);
+    }
+    brands = newBrands;
+
     return (
         <div className="brands-cards-contianer">
-            {
-                brands.map((brand) => (
-                    <div 
-                        key={brand.id}
-                        className="brand-card"
-                        onClick={()=> {props.handleTracking(brand.id)}}
-                    >
-                        <img 
-                            src={brand.image}
-                            className="brand-logo"
-                        />
-                        <p className="brand-name">{brand.name}</p>
-                    </div>
-                ))
-            }
-        </div>
+        {
+            newBrands.map((brand) => (
+                <div 
+                    key={brand.id}
+                    className="brand-card"
+                    onClick={()=> {
+                        props.handleTracking(brand.id)
+                    }}
+                >
+                    <img 
+                        src={brand.image}
+                        alt={brand.name + "-img"}
+                        className="brand-logo"
+                    />
+                    <p className="brand-name">{brand.name}</p>
+                </div>
+            ))
+        }
+    </div>
+    )
+}
+        
+    return (
+        shuffleCards(brands)
     )
 }
 
