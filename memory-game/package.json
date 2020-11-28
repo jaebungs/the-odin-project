@@ -11,7 +11,7 @@
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4"
   },
-  "homepage": "https://jaebungs.github.io/the-odin-project",
+  "homepage": "https://jaebungs.github.io/the-odin-project/memory-game",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
