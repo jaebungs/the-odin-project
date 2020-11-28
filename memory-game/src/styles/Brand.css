@@ -10,8 +10,10 @@
 
 .brand-card {
     background-color:#ffb870;
+    box-shadow: 3px 2px #a8764f;
     cursor: pointer;
     width: 130px;
+    height: 190px;
     padding: 10px;
     margin: 10px;
 }
