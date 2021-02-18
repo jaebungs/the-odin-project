@@ -1,5 +1,7 @@
 # the-odin-project
 
+It looks horrible as well as its code. I made these at my early programming.   
+
 CV Generator: https://jaebungs.github.io/the-odin-project/CV-app-react/public/  
 Memory Card Game: https://jaebungs.github.io/the-odin-project//memory-game/public/index  
 Shopping website: https://jaebungs.github.io/shopping-website/  
